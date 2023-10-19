@@ -1,6 +1,6 @@
 "use client";
 
-import data from "@/data/data";
+import data from "@/config";
 import Link from "next/link";
 import {
   HeaderContainer,
@@ -13,7 +13,6 @@ import {
   Container,
 } from "@/styles/linkBoardStyles";
 import { useEffect, useState } from "react";
-import Theme from "@/types/theme";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);

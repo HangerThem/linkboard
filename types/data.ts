@@ -1,15 +1,11 @@
-import Theme from "./theme";
-
 interface Data {
-  theme?: Theme;
+  theme?: string;
   name: string;
   description: string;
   profilePicture: string;
   links: {
     name: string;
     url: string;
-    icon: any;
+    icon?: any;
   }[];
 }
-
-export default Data;

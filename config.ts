@@ -7,11 +7,9 @@ import {
   Instagram,
   Messenger,
 } from "react-bootstrap-icons";
-import Theme from "@/types/theme";
-import Data from "@/types/data";
 
 const data: Data = {
-  theme: Theme.default,
+  theme: "default",
   name: "Frank Borisjuk",
   description: "Software Engineer",
   profilePicture: "/profile.png",
