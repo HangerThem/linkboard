@@ -111,7 +111,7 @@ export const LinkContainer = styled.div<LinkContainerProps>`
   border-radius: 10px;
   background-color: rgba(var(--color-background), 0.2);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(var(--color-background), 0.5);
+  border: 1px solid rgba(var(--color-border), 0.5);
   text-align: center;
   font-family: ${fontFamily};
   animation: scaleIn 1s ease-out forwards;

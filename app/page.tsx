@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   data.links.sort((a, b) => (a.name.length > b.name.length ? 1 : -1));
-  document.documentElement.setAttribute("theme", data.theme || "default");
+  document.documentElement.setAttribute("theme", data.theme || "dark");
 
   return (
     <Container>
