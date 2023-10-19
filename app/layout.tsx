@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "HangerThem",
-      url: "https://hangarthem.com",
+      url: "https://hangerthem.com",
     },
   ],
   keywords: ["link", "board", "linkboard", "bulletin", "bulletin"],
