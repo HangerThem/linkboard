@@ -16,10 +16,35 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const nameLength = data.name.length;
+  const charList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const [randomizedName, setRandomizedName] = useState(data.name);
 
   useEffect(() => {
     setLoading(false);
+    if (data.animation && data.animation?.nameRandomizer) nameRandomizer();
   }, []);
+
+  const nameRandomizer = () => {
+    let iterations = 0;
+    let loopNumber = 0;
+    const interval = setInterval(() => {
+      let randomChars = "";
+      for (let i = 0; i < nameLength - iterations; i++) {
+        randomChars += charList[Math.floor(Math.random() * charList.length)];
+      }
+      loopNumber++;
+      if (loopNumber >= 80) {
+        setRandomizedName(data.name.slice(0, iterations) + randomChars);
+        if (loopNumber % 2 === 0) iterations++;
+      } else {
+        setRandomizedName(randomChars);
+      }
+    }, 15);
+    setTimeout(() => {
+      clearInterval(interval);
+    }, nameLength * 200);
+  };
 
   if (loading) {
     return null;
@@ -38,7 +63,7 @@ export default function Home() {
           height={200}
         />
         <InfoContainer>
-          <Name>{data.name}</Name>
+          <Name>{randomizedName}</Name>
           <Description>{data.description}</Description>
         </InfoContainer>
       </HeaderContainer>

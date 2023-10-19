@@ -10,6 +10,9 @@ import {
 
 const data: Data = {
   theme: "default",
+  animation: {
+    nameRandomizer: false,
+  },
   name: "Frank Borisjuk",
   description: "Software Engineer",
   profilePicture: "/profile.png",

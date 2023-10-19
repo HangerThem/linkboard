@@ -79,7 +79,29 @@ export const Description = styled.p`
   &::before,
   &::after {
     content: "-";
-    margin: 0 0.5rem;
+    margin: 0 2.5rem;
+    opacity: 0;
+  }
+
+  &::before {
+    animation: slideIn 0.5s ease-out forwards;
+    animation-delay: 2500ms;
+  }
+
+  &::after {
+    animation: slideIn 0.5s ease-out forwards;
+    animation-delay: 2500ms;
+  }
+
+  @keyframes slideIn {
+    from {
+      margin: 0 2.5rem;
+      opacity: 0;
+    }
+    to {
+      margin: 0 0.5rem;
+      opacity: 1;
+    }
   }
 `;
 
@@ -102,7 +124,6 @@ export const LinksContainer = styled.div<LinksContainerProps>`
 
 export const LinkContainer = styled.div<LinkContainerProps>`
   text-decoration: none;
-  display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.2s ease-in-out;
@@ -114,8 +135,9 @@ export const LinkContainer = styled.div<LinkContainerProps>`
   border: 1px solid rgba(var(--color-border), 0.5);
   text-align: center;
   font-family: ${fontFamily};
-  animation: scaleIn 1s ease-out forwards;
+  display: flex;
   transform: scaleX(0);
+  animation: scaleIn 1s ease-out forwards;
   animation-delay: ${(props) => props.delay + 1000}ms;
 
   a {
@@ -134,6 +156,7 @@ export const LinkContainer = styled.div<LinkContainerProps>`
   @keyframes scaleIn {
     from {
       transform: scaleX(0);
+      display: flex;
     }
     to {
       transform: scaleX(1);
@@ -141,7 +164,9 @@ export const LinkContainer = styled.div<LinkContainerProps>`
   }
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
+    background-color: rgba(var(--color-background), 0.3);
+    border: 1px solid rgba(var(--color-border), 0.8);
     cursor: pointer;
   }
 `;

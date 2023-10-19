@@ -41,15 +41,17 @@ npm run dev
 
 1. Customize your LinkBoard by editing the configuration file `config.ts` to include your name, description, and social links.
 
-2. Customize the visual theme by modifying the `variables.css` file with your preferred color scheme.
+2. Customize the visual theme by modifying the `variables.css` file with your preferred color scheme, and setting the `theme` variable in the `config.ts` file to the name of your theme.
 
-3. Add your profile picture by replacing the existing image at `/public/profile.png`.
+3. There are also some animations that can be enabled or disabled in the `config.ts` file.
 
-4. Add background image by replacing the existing image at `/public/background.webp`.
+4. Add your profile picture by replacing the existing image at `/public/profile.png`.
 
-5. Add links to your LinkBoard in the `config.ts` file. You can include the name, URL, and an optional icon.
+5. Add background image by replacing the existing image at `/public/background.webp`.
 
-6. Customize the project's metadata in the `layout.tsx` file, including the title and description.
+6. Add links to your LinkBoard in the `config.ts` file. You can include the name, URL, and an optional icon.
+
+7. Customize the project's metadata in the `layout.tsx` file, including the title and description.
 
 ## Contributing
 

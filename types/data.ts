@@ -3,6 +3,9 @@ interface Data {
   name: string;
   description: string;
   profilePicture: string;
+  animation?: {
+    nameRandomizer: boolean;
+  };
   links: {
     name: string;
     url: string;
