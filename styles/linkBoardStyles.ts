@@ -143,6 +143,7 @@ export const LinkContainer = styled.div<LinkContainerProps>`
   a {
     gap: 1rem;
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
