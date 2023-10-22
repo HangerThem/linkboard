@@ -6,6 +6,7 @@ import {
   Telegram,
   Instagram,
   Messenger,
+  Spotify,
 } from "react-bootstrap-icons";
 
 const data: Data = {
@@ -51,6 +52,11 @@ const data: Data = {
       name: "Messenger",
       url: "https://m.me/frant.borisjukovic",
       icon: Messenger,
+    },
+    {
+      name: "Spotify",
+      url: "https://open.spotify.com/user/jiguc8apyguwslzwptmx0e4zn",
+      icon: Spotify,
     },
   ],
 };
