@@ -7,6 +7,7 @@ import {
   Instagram,
   Messenger,
   Spotify,
+  Discord,
 } from "react-bootstrap-icons";
 
 const data: Data = {
@@ -57,6 +58,11 @@ const data: Data = {
       name: "Spotify",
       url: "https://open.spotify.com/user/jiguc8apyguwslzwptmx0e4zn",
       icon: Spotify,
+    },
+    {
+      name: "Discord",
+      url: "https://discord.com/users/495134242825699328",
+      icon: Discord,
     },
   ],
 };

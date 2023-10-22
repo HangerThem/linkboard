@@ -59,8 +59,8 @@ export default function Home() {
         <ProfilePicture
           src={data.profilePicture}
           alt="Profile"
-          width={200}
-          height={200}
+          width={150}
+          height={150}
         />
         <InfoContainer>
           <Name>{randomizedName}</Name>

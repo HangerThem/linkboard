@@ -31,7 +31,7 @@ const fontFamily = "var(--font-family)";
 
 export const Container = styled.div`
   ${flexCenter}
-  gap: 2rem;
+  gap: 1rem;
   height: 100vh;
 `;
 
@@ -51,8 +51,8 @@ export const InfoContainer = styled.div`
 
 export const ProfilePicture = styled(Image)`
   border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   background-color: rgba(var(--color-image));
   border: 5px solid rgba(var(--color-image));
@@ -61,8 +61,8 @@ export const ProfilePicture = styled(Image)`
 `;
 
 export const Name = styled.h1`
-  font-size: 2.5rem;
-  line-height: 2.5rem;
+  font-size: 2rem;
+  line-height: 2rem;
   font-family: ${fontFamily};
   font-weight: bold;
   position: relative;
@@ -70,8 +70,8 @@ export const Name = styled.h1`
 `;
 
 export const Description = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.25rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
   font-family: ${fontFamily};
   font-weight: normal;
   margin: 0;
@@ -107,7 +107,7 @@ export const Description = styled.p`
 
 export const LinksContainer = styled.div<LinksContainerProps>`
   ${flexCenter}
-  gap: 15px;
+  gap: 10px;
   height: 0;
   animation: scaleUp 0.5s ease-out forwards;
   animation-delay: 1000ms;
