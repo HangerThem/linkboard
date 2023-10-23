@@ -17,7 +17,6 @@ const data: Data = {
   },
   name: "Frank Borisjuk",
   description: "Software Engineer",
-  profilePicture: "/profile.png",
   links: [
     {
       name: "Twitter",

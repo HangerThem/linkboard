@@ -2,7 +2,6 @@ interface Data {
   theme?: string;
   name: string;
   description: string;
-  profilePicture: string;
   animation?: {
     nameRandomizer: boolean;
   };
