@@ -13,6 +13,7 @@ import {
   Container,
 } from "@/styles/linkBoardStyles";
 import { useEffect, useState } from "react";
+import ShareBar from "@/components/sharebar/sharebar";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -55,6 +56,7 @@ export default function Home() {
 
   return (
     <Container>
+      <ShareBar />
       <HeaderContainer>
         <ProfilePicture
           src="/profile.png"
