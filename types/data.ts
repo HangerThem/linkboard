@@ -1,4 +1,5 @@
 interface Data {
+  title?: string;
   theme?: string;
   name: string;
   description: string;

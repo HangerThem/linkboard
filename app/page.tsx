@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import ShareBar from "@/components/sharebar/sharebar";
 
-export default function Home() {
+export default function Page() {
   const [loading, setLoading] = useState(true);
   const nameLength = data.name.length;
   const charList = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -53,6 +53,7 @@ export default function Home() {
 
   data.links.sort((a, b) => (a.name.length > b.name.length ? 1 : -1));
   document.documentElement.setAttribute("theme", data.theme || "dark");
+  document.title = data.name || "Link Board";
 
   return (
     <Container>
