@@ -21,7 +21,9 @@ export default function ShareBar() {
   };
 
   const handleCopyEmbed = () => {
-    navigator.clipboard.writeText(`<iframe src="${window.location.href}" />`);
+    navigator.clipboard.writeText(
+      `<iframe src="${window.location.href}" height="750" width="375"/>`
+    );
   };
 
   const handleOpenShareOptions = () => {
@@ -34,8 +36,8 @@ export default function ShareBar() {
         <Image
           src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${window.location.href}`}
           alt="QR Code"
-          width={150}
-          height={150}
+          width={250}
+          height={250}
         />
       </ShareDialog>
       <ShareBarContainer>
@@ -45,7 +47,7 @@ export default function ShareBar() {
           <CodeSquare onClick={handleCopyEmbed} title="Copy Embed" />
         </ShareLinksContainer>
         <ShareTrigger onClick={handleOpenShareOptions}>
-          <Share style={{ zIndex: 1000 }} />
+          <Share />
         </ShareTrigger>
       </ShareBarContainer>
     </>

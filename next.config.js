@@ -9,6 +9,7 @@ const nextConfig = {
   images: {
     domains: ["api.qrserver.com"],
   },
+  output: "standalone",
 };
 
 module.exports = nextConfig;

@@ -32,7 +32,7 @@ const fontFamily = "var(--font-family)";
 export const Container = styled.div`
   ${flexCenter}
   gap: 1rem;
-  height: 100vh;
+  min-height: 100vh;
 `;
 
 export const HeaderContainer = styled.div`

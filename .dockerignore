@@ -1,0 +1,10 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+LICENSE
+.next
+.git

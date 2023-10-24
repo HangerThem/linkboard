@@ -68,10 +68,7 @@ export const ShareLinksContainer = styled.div<ShareLinksContainerProps>`
 
 export const ShareDialog = styled.dialog`
   border: none;
-  background-color: rgba(var(--color-background), 0.5);
   z-index: 1;
-  position: fixed;
-  inset: 0;
 `;
 
 export const ShareTrigger = styled.div`
