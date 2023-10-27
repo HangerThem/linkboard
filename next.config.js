@@ -6,6 +6,9 @@ const nextConfig = {
       displayName: true,
     },
   },
+  images: {
+    domains: ["api.qrserver.com"],
+  },
 };
 
 module.exports = nextConfig;
