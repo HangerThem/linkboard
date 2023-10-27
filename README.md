@@ -51,7 +51,7 @@ npm run dev
 
 6. Add links to your LinkBoard in the `config.ts` file. You can include the name, URL, and an optional icon.
 
-7. Customize the project's metadata in the `layout.tsx` file, including the title and description.
+7. Customize the app's title in the `config.ts` file.
 
 ## Contributing
 

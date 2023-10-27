@@ -5,7 +5,7 @@ import "@/styles/normalize.css";
 import "@/styles/variables.css";
 
 export const metadata: Metadata = {
-  title: "Frank's LinkBoard",
+  title: "‎",
   description: "A link board, like a bulletin board, but for links.",
   authors: [
     {
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   ],
   keywords: ["link", "board", "linkboard", "bulletin", "bulletin"],
   creator: "HangerThem",
+  publisher: "HangerThem",
 };
 
 export default function RootLayout({
