@@ -10,30 +10,30 @@ Before contributing, please take a moment to read through this guide to understa
 
 2. **Clone Your Fork**: Use `git clone` to clone your forked repository to your local machine:
 
-   ```bash
-   git clone https://github.com/your-username/LinkBoard.git
-   cd LinkBoard
-   ```
+	```bash
+	git clone https://github.com/your-username/LinkBoard.git
+	cd LinkBoard
+	```
 
 3. **Create a New Branch**: Create a new branch for your contribution. Make sure your branch name is descriptive:
 
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+	```bash
+	git checkout -b feature/your-feature-name
+	```
 
 4. **Make Your Changes**: Work on your feature or bug fix, and ensure that your code follows the project's coding style and conventions.
 
 5. **Commit Your Changes**: Use descriptive commit messages. Please make sure to reference any related issues:
 
-   ```bash
-   git commit -m "Add new feature"
-   ```
+	```bash
+	git commit -m "Add new feature"
+	```
 
 6. **Push Your Changes**: Push your branch to your fork on GitHub:
 
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+	```bash
+	git push origin feature/your-feature-name
+	```
 
 7. **Create a Pull Request (PR)**: Open a Pull Request on the [LinkBoard repository](https://github.com/hangerthem/LinkBoard) and provide a detailed description of your changes.
 

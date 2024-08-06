@@ -1,26 +1,26 @@
 :root[theme="default"] {
-  --font-family: "K2D", sans-serif;
-  --color-title: 225, 225, 225;
-  --color-text: 200, 200, 200;
-  --color-image: 40, 40, 40;
-  --color-background: 20, 20, 20;
-  --color-border: 100, 100, 100;
+	--font-family: "K2D", sans-serif;
+	--color-title: 225, 225, 225;
+	--color-text: 200, 200, 200;
+	--color-image: 40, 40, 40;
+	--color-background: 20, 20, 20;
+	--color-border: 100, 100, 100;
 }
 
 :root[theme="dark"] {
-  --font-family: "K2D", sans-serif;
-  --color-title: 25, 25, 25;
-  --color-text: 200, 200, 200;
-  --color-image: 150, 150, 150;
-  --color-background: 50, 50, 50;
-  --color-border: 25, 25, 25;
+	--font-family: "K2D", sans-serif;
+	--color-title: 25, 25, 25;
+	--color-text: 200, 200, 200;
+	--color-image: 150, 150, 150;
+	--color-background: 50, 50, 50;
+	--color-border: 25, 25, 25;
 }
 
 :root[theme="light"] {
-  --font-family: "K2D", sans-serif;
-  --color-title: 225, 225, 225;
-  --color-text: 25, 25, 25;
-  --color-image: 40, 40, 40;
-  --color-background: 225, 225, 225;
-  --color-border: 225, 225, 225;
+	--font-family: "K2D", sans-serif;
+	--color-title: 225, 225, 225;
+	--color-text: 25, 25, 25;
+	--color-image: 40, 40, 40;
+	--color-background: 225, 225, 225;
+	--color-border: 225, 225, 225;
 }
