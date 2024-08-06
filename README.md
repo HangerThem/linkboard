@@ -55,11 +55,11 @@ npm run dev
 
 ## Contributing
 
-I welcome contributions from the community. If you'd like to contribute to this project, please follow my [Contribution Guidelines](CONTRIBUTING.md).
+I welcome contributions from the community. If you'd like to contribute to this project, please follow my [Contribution Guidelines](CONTRIBUTING).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the AGPLv3 License. For more information, please refer to the [LICENSE](LICENSE) file.
 
 ## Contact
 
