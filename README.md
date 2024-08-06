@@ -64,7 +64,7 @@ This project is licensed under the AGPLv3 License. For more information, please 
 ## Contact
 
 - **Frank Borisjuk**
-  - Email: [f.borisjuk@hangerthem.com](mailto:f.borisjuk@hangerthem.com)
+	- Email: [f.borisjuk@hangerthem.com](mailto:f.borisjuk@hangerthem.com)
 
 Feel free to reach out if you have any questions, suggestions, or need assistance.
 
