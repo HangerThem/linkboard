@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=K2D&display=swap");
 
 body {
-	background-image: url("/background.webp");
-	background-attachment: fixed;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+  background-image: url("/background.webp");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
