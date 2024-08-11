@@ -8,6 +8,7 @@ import {
   Messenger,
   Spotify,
   Discord,
+  JournalAlbum,
 } from "react-bootstrap-icons";
 
 const data: Data = {
@@ -63,6 +64,11 @@ const data: Data = {
       name: "Discord",
       url: "https://discord.com/users/495134242825699328",
       icon: Discord,
+    },
+    {
+      name: "Blog",
+      url: "https://blog.hangerthem.com",
+      icon: JournalAlbum,
     },
   ],
   sortByLength: true,
