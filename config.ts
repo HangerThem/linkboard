@@ -1,77 +1,47 @@
 import {
-  Twitter,
+  Globe,
   Github,
   Linkedin,
   EnvelopeFill,
-  Telegram,
   Instagram,
-  Messenger,
-  Spotify,
-  Discord,
-  JournalAlbum,
-} from "react-bootstrap-icons";
+} from 'react-bootstrap-icons';
 
 const data: Data = {
-  title: "Frank's Linkboard",
-  theme: "default",
+  title: "Jacob's Linkboard",
+  theme: 'default',
   animation: {
     nameRandomizer: false,
   },
-  name: "Frank Borisjuk",
-  description: "Software Engineer",
+  name: 'Jacob Kreindler',
+  description: 'Photographer, Developer, Learner',
   links: [
     {
-      name: "Twitter",
-      url: "https://twitter.com/hangerthem",
-      icon: Twitter,
+      name: 'Website',
+      url: 'https://jacob.kreindler.ca',
+      icon: Globe,
     },
     {
-      name: "GitHub",
-      url: "https://github.com/hangerthem",
-      icon: Github,
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/franti%C5%A1ek-borisjuk-022686225/",
-      icon: Linkedin,
-    },
-    {
-      name: "Email",
-      url: "mailto:f.borisjuk@hangerthem.com",
-      icon: EnvelopeFill,
-    },
-    {
-      name: "Telegram",
-      url: "https://t.me/hangerthem",
-      icon: Telegram,
-    },
-    {
-      name: "Instagram",
-      url: "https://www.instagram.com/ferda_borisjuk/",
+      name: 'Instagram',
+      url: 'https://instagram.com/cameracob',
       icon: Instagram,
     },
     {
-      name: "Messenger",
-      url: "https://m.me/frant.borisjukovic",
-      icon: Messenger,
+      name: 'GitHub',
+      url: 'https://github.com/orbitally',
+      icon: Github,
     },
     {
-      name: "Spotify",
-      url: "https://open.spotify.com/user/jiguc8apyguwslzwptmx0e4zn",
-      icon: Spotify,
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/jacobkreindler/',
+      icon: Linkedin,
     },
     {
-      name: "Discord",
-      url: "https://discord.com/users/495134242825699328",
-      icon: Discord,
-    },
-    {
-      name: "Blog",
-      url: "https://blog.hangerthem.com",
-      icon: JournalAlbum,
+      name: 'Email',
+      url: 'mailto:hello@kreindler.ca',
+      icon: EnvelopeFill,
     },
   ],
-  sortByLength: true,
+  sortByLength: false,
 };
 
 export default data;
