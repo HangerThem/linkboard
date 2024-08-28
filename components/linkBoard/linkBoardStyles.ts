@@ -74,6 +74,13 @@ export const Description = styled.p`
   font-weight: normal;
   margin: 0;
 
+  @media screen and (max-width: 408px) {
+    &::before,
+    &::after {
+      margin: 0 0.5rem !important;
+    }
+  }
+
   &::before,
   &::after {
     content: "-";
