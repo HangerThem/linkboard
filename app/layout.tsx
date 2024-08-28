@@ -7,7 +7,7 @@ import '@/styles/normalize.css';
 
 export const metadata: Metadata = {
   title: data.title,
-
+  icons: ['/profile.png'],
   description: 'A link board, like a bulletin board, but for links.',
   authors: [
     {
