@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
-import Image from "next/image";
+import styled, { css, keyframes } from 'styled-components';
+import Image from 'next/image';
 
 interface LinkContainerProps {
   $delay: number;
@@ -61,7 +61,7 @@ export const ProfilePicture = styled(Image)`
 export const Name = styled.h1`
   font-size: 2rem;
   line-height: 2rem;
-  font-family: ${({ theme }) => theme.fonts.join(", ")};
+  font-family: ${({ theme }) => theme.fonts.join(', ')};
   font-weight: bold;
   position: relative;
   margin: 0;
@@ -70,13 +70,20 @@ export const Name = styled.h1`
 export const Description = styled.p`
   font-size: 1.2rem;
   line-height: 1.2rem;
-  font-family: ${({ theme }) => theme.fonts.join(", ")};
+  font-family: ${({ theme }) => theme.fonts.join(', ')};
   font-weight: normal;
   margin: 0;
 
+  @media screen and (max-width: 408px) {
+    &::before,
+    &::after {
+      margin: 0 0.5rem !important;
+    }
+  }
+
   &::before,
   &::after {
-    content: "-";
+    content: '-';
     margin: 0 2.5rem;
     opacity: 0;
   }
@@ -132,7 +139,7 @@ export const LinkContainer = styled.div<LinkContainerProps>`
   backdrop-filter: blur(10px);
   border: 1px solid rgba(${({ theme }) => theme.colors.border}, 0.5);
   text-align: center;
-  font-family: ${({ theme }) => theme.fonts.join(", ")};
+  font-family: ${({ theme }) => theme.fonts.join(', ')};
   display: flex;
   transform: scaleX(0);
   animation: scaleIn 1s ease-out forwards;
