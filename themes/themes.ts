@@ -15,10 +15,10 @@ export const themes: Themes = {
   default: {
     colors: {
       title: '225, 225, 225',
-      text: '200, 200, 200',
-      image: '50, 50, 50',
-      background: '20, 20, 20',
-      border: '100, 100, 100',
+      text: '225, 225, 225',
+      image: '79, 83, 98',
+      background: '96, 102, 119',
+      border: '80, 84, 99',
     },
     fonts: ['K2D', 'sans-serif'],
   },

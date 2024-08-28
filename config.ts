@@ -10,7 +10,7 @@ const data: Data = {
   title: "Jacob's Linkboard",
   theme: 'default',
   animation: {
-    nameRandomizer: false,
+    nameRandomizer: true,
   },
   name: 'Jacob Kreindler',
   description: 'Photographer // Developer',
