@@ -9,7 +9,8 @@ import {
   Spotify,
   Discord,
   JournalAlbum,
-} from "react-bootstrap-icons";
+} from "react-bootstrap-icons"
+import { Data } from "./types/data"
 
 const data: Data = {
   title: "Frank's Linkboard",
@@ -72,6 +73,6 @@ const data: Data = {
     },
   ],
   sortByLength: true,
-};
+}
 
-export default data;
+export default data

@@ -1,0 +1,16 @@
+generator clientDev {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource dbDev {
+  provider = "sqlite"
+}
+
+model Link {
+  id        String   @id @default(cuid())
+  icon      String
+  url       String
+  title     String
+  createdAt DateTime @default(now())
+}

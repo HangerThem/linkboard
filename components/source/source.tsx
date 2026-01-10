@@ -1,14 +1,14 @@
-import { Git } from "react-bootstrap-icons";
-import { SourceContainer } from "@/components/source/sourceStyles";
+import Link from "next/link"
+import { Git } from "react-bootstrap-icons"
 
 export default function Source() {
   return (
-    <SourceContainer
+    <Link
       href="https://github.com/hangerthem/linkboard"
       target="_blank"
       rel="noopener noreferrer"
     >
       <Git size={24} />
-    </SourceContainer>
-  );
+    </Link>
+  )
 }
