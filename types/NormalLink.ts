@@ -2,8 +2,15 @@ import * as Icons from "react-bootstrap-icons"
 import z from "zod"
 
 export const NormalLinkSchema = z.object({
-  id: z.cuid(),
-  title: z.string().min(1).max(255),
+  id: z.string(),
+  title: z
+    .string()
+    .min(1, {
+      error: "Too short",
+    })
+    .max(255, {
+      error: "Too long",
+    }),
   url: z.url().max(2048),
   icon: z
     .string()

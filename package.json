@@ -10,18 +10,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.9",
+    "@hookform/resolvers": "^5.2.2",
     "@prisma/adapter-better-sqlite3": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@vercel/analytics": "^1.6.1",
     "dotenv": "^17.2.3",
+    "motion": "^12.26.1",
     "nanoid": "^5.1.6",
     "next": "^16.1.1",
-    "prisma": "^7.2.0",
     "react": "^19.2.3",
     "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.71.0",
+    "sortablejs": "^1.15.6",
     "styled-components": "^6.2.0",
     "zod": "^4.3.5"
   },
@@ -33,7 +34,7 @@
     "@types/sortablejs": "^1.15.9",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.1",
-    "sortablejs": "^1.15.6",
+    "prisma": "^7.2.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   }

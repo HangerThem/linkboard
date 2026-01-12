@@ -7,7 +7,7 @@ datasource db {
   provider = "sqlite"
 }
 
-model SmallLink {
+model TopLink {
   id        String   @id @default(cuid())
   icon      String
   url       String
@@ -30,4 +30,12 @@ model LinkGroup {
   name      String
   links     NormalLink[]
   createdAt DateTime     @default(now())
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -36,6 +36,3 @@ next-env.d.ts
 
 # prisma
 generated/
-
-# temporary files
-.tmp/
