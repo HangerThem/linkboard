@@ -29,12 +29,12 @@ export async function POST(req: NextRequest) {
   }
 
   await prisma.topLink.deleteMany()
-  const topLinksData = await prisma.topLink.createMany({
+  const topLinksData = await prisma.topLink.createManyAndReturn({
     data: validatedTopLinks.data,
   })
 
   await prisma.normalLink.deleteMany()
-  const normalLinksData = await prisma.normalLink.createMany({
+  const normalLinksData = await prisma.normalLink.createManyAndReturn({
     data: validatedNormalLinks.data,
   })
 

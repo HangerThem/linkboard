@@ -10,6 +10,8 @@ export default async function Page() {
   const topLinks = await prisma.topLink.findMany()
   const normalLinks = await prisma.normalLink.findMany()
 
+  const settings = (await prisma.setting.findFirst())!
+
   return (
     <div className="min-h-screen bg-black text-white">
       <ShareBar />
@@ -43,9 +45,11 @@ export default async function Page() {
 
         <LinksList links={normalLinks} />
 
-        <div className="flex justify-center pt-8">
-          <Source />
-        </div>
+        {settings.source && (
+          <div className="flex justify-center pt-8">
+            <Source />
+          </div>
+        )}
       </main>
     </div>
   )

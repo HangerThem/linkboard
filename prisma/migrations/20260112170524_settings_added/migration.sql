@@ -1,0 +1,6 @@
+-- CreateTable
+CREATE TABLE "Setting" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "source" BOOLEAN NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

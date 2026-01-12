@@ -1,9 +1,12 @@
 import Editor from "@/components/forms/Editor"
+import SettingsForm from "@/components/forms/Settings"
 import prisma from "@/lib/prisma"
 
 export default async function EditorPage() {
   const normalLinks = await prisma.normalLink.findMany()
   const topLinks = await prisma.topLink.findMany()
+
+  const settings = (await prisma.setting.findFirst())!
 
   return (
     <main className="min-h-screen bg-black py-12 px-6">
@@ -13,7 +16,9 @@ export default async function EditorPage() {
       <p className="mb-12 text-center text-neutral-500">
         Manage your links and customize your LinkBoard
       </p>
-      <Editor data={{ normalLinks, topLinks }} />;
+      <Editor data={{ normalLinks, topLinks }} />
+
+      <SettingsForm data={settings} />
     </main>
   )
 }
