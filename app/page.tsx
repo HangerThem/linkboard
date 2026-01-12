@@ -1,5 +1,32 @@
-import LinkBoard from "@/components/linkBoard/linkBoard";
+import Link from "next/link"
+import Icon from "@/components/icon"
+import ShareBar from "@/components/sharebar/sharebar"
+import Source from "@/components/source/source"
+import Image from "next/image"
+import prisma from "@/lib/prisma"
 
-export default function Page() {
-  return <LinkBoard />;
+export default async function Page() {
+  const data = await prisma.link.findMany()
+
+  return (
+    <div>
+      <ShareBar />
+      <div>
+        <Image src="/profile.png" alt="Profile" width={150} height={150} />
+        <div>
+          {/* <div>{randomizedName}</div>
+          <div>{data.description}</div> */}
+        </div>
+      </div>
+      <div>
+        {data.map((link) => (
+          <div key={link.url}>
+            {link.icon && <Icon name={link.icon} />}
+            <Link href={link.url}>{link.title}</Link>
+          </div>
+        ))}
+      </div>
+      <Source />
+    </div>
+  )
 }

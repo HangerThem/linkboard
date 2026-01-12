@@ -10,9 +10,8 @@ import {
   Discord,
   JournalAlbum,
 } from "react-bootstrap-icons"
-import { Data } from "./types/data"
 
-const data: Data = {
+const data = {
   title: "Frank's Linkboard",
   theme: "default",
   animation: {

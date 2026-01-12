@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model SmallLink {
+  id        String   @id @default(cuid())
+  icon      String
+  url       String
+  createdAt DateTime @default(now())
+}
+
+model NormalLink {
+  id          String     @id @default(cuid())
+  icon        String?
+  url         String
+  title       String
+  createdAt   DateTime   @default(now())
+  linkGroup   LinkGroup? @relation(fields: [linkGroupId], references: [id])
+  linkGroupId String?
+}
+
+model LinkGroup {
+  id        String       @id @default(cuid())
+  icon      String?
+  name      String
+  links     NormalLink[]
+  createdAt DateTime     @default(now())
+}
