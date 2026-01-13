@@ -92,7 +92,7 @@ export default function IconSearch({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         type="button"
-                        className="flex flex-col items-center justify-center p-3 rounded-lg border border-neutral-800 group cursor-pointer"
+                        className="flex flex-col items-center justify-center p-3 rounded-lg border border-neutral-800 group"
                         onClick={() => {
                           handleSelect(name)
                           handleClose()
@@ -103,6 +103,7 @@ export default function IconSearch({
                         }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.1 }}
+                        title={name}
                       >
                         <IconComponent
                           size={24}
@@ -134,7 +135,7 @@ export default function IconSearch({
                 </span>
                 <motion.button
                   type="button"
-                  className="px-5 py-2 bg-neutral-800 border border-neutral-700 text-neutral-300 rounded-full text-sm font-medium cursor-pointer"
+                  className="px-5 py-2 bg-neutral-800 border border-neutral-700 text-neutral-300 rounded-full text-sm font-medium"
                   onClick={handleClose}
                   whileHover={{
                     borderColor: "#525252",

@@ -4,6 +4,7 @@ import z from "zod"
 export const TopLinkSchema = z.object({
   id: z.string(),
   url: z.url().max(2048),
+  order: z.number().optional(),
   icon: z
     .string()
     .min(1, "Icon is required")

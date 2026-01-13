@@ -6,12 +6,14 @@ export const NormalLinkSchema = z.object({
   title: z
     .string()
     .min(1, {
-      error: "Too short",
+      message: "Too short",
     })
     .max(255, {
-      error: "Too long",
+      message: "Too long",
     }),
   url: z.url().max(2048),
+  order: z.number().optional(),
+  linkGroupId: z.string().nullable().optional(),
   icon: z
     .string()
     .refine((val) => val === "" || val in Icons, {

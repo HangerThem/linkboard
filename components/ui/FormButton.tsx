@@ -17,7 +17,7 @@ export default function FormButton({
   ...props
 }: FormButtonProps) {
   const baseStyles =
-    "flex items-center justify-center gap-2 rounded-full text-sm font-medium cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+    "flex items-center justify-center gap-2 rounded-full text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
   const variantStyles = {
     primary: "px-4 py-2 bg-white text-black",
     secondary: "px-4 py-2 bg-neutral-800 text-white border border-neutral-700",

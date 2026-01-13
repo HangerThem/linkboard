@@ -7,7 +7,7 @@ import "./global.css"
 export const metadata: Metadata = {
   title: data.title,
   icons: ["/profile.png"],
-  description: "A link board, like a bulletin board, but for links.",
+  description: "LinkBoard - A simple and customizable link board application.",
   authors: [
     {
       name: "HangerThem",
@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-black text-white">
         <ThemeContext>{children}</ThemeContext>
         <Analytics />
       </body>

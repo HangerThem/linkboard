@@ -7,10 +7,25 @@ datasource db {
   provider = "sqlite"
 }
 
+enum Density {
+  COMPACT
+  COMFORTABLE
+  SPACIOUS
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  name      String
+  bio       String?
+  avatar    String?
+  createdAt DateTime @default(now())
+}
+
 model TopLink {
   id        String   @id @default(cuid())
   icon      String
   url       String
+  order     Int      @default(0)
   createdAt DateTime @default(now())
 }
 
@@ -19,6 +34,7 @@ model NormalLink {
   icon        String?
   url         String
   title       String
+  order       Int        @default(0)
   createdAt   DateTime   @default(now())
   linkGroup   LinkGroup? @relation(fields: [linkGroupId], references: [id])
   linkGroupId String?
@@ -28,12 +44,15 @@ model LinkGroup {
   id        String       @id @default(cuid())
   icon      String?
   name      String
+  order     Int          @default(0)
   links     NormalLink[]
   createdAt DateTime     @default(now())
 }
 
 model Setting {
   id        String   @id @default(cuid())
-  source    Boolean
+  source    Boolean  @default(true)
+  shareBar  Boolean  @default(true)
+  density   Density  @default(COMFORTABLE)
   createdAt DateTime @default(now())
 }

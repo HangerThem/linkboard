@@ -24,6 +24,7 @@
     "react-hook-form": "^7.71.0",
     "sortablejs": "^1.15.6",
     "styled-components": "^6.2.0",
+    "tsx": "^4.21.0",
     "zod": "^4.3.5"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "eslint-config-next": "^16.1.1",
     "prisma": "^7.2.0",
     "tailwindcss": "^4.1.18",
-    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }

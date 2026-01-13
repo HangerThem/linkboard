@@ -19,12 +19,18 @@ export async function POST(req: NextRequest) {
     )
   }
 
-  await prisma.setting.deleteMany()
-  const settingsData = await prisma.setting.create({
-    data: validatedSettings.data,
+  await prisma.$transaction(async (tx) => {
+    await tx.setting.deleteMany()
+    await tx.setting.create({
+      data: validatedSettings.data,
+    })
   })
 
-  const data = { settings: settingsData }
+  const settingsData = await prisma.setting.findFirst()
+
+  const data = {
+    settings: settingsData,
+  }
 
   return NextResponse.json({ data }, { status: 200 })
 }

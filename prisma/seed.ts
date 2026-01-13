@@ -1,14 +1,26 @@
 import prisma from "@/lib/prisma"
+import { Density } from "./generated/enums"
 
 async function main() {
-  await prisma.setting.deleteMany()
-  const settings = await prisma.setting.create({
+  await prisma.profile.deleteMany()
+  await prisma.profile.create({
     data: {
-      source: true,
+      id: "default",
+      name: "Your Name",
+      bio: "This is your bio.",
+			avatar: null,
     },
   })
 
-  console.log({ settings })
+  await prisma.setting.deleteMany()
+  await prisma.setting.create({
+    data: {
+      id: "default",
+      shareBar: true,
+      source: false,
+      density: Density.COMFORTABLE,
+    },
+  })
 }
 main()
   .then(async () => {
