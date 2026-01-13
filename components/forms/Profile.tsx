@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState, useRef } from "react"
 import z from "zod"
-import { ProfileCreate, ProfileCreateSchema } from "@/types/Profile"
+import { Profile, ProfileCreate, ProfileCreateSchema } from "@/types/Profile"
 import Section from "@/components/ui/Section"
 import FormButton from "@/components/ui/FormButton"
 import { motion } from "motion/react"
@@ -18,7 +18,7 @@ const FormDataSchema = z.object({
 type FormData = z.infer<typeof FormDataSchema>
 
 interface ProfileFormProps {
-  data: ProfileCreate
+  data: Profile
 }
 
 export default function ProfileForm({ data }: ProfileFormProps) {
@@ -82,7 +82,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
       const submitData = new FormData()
       submitData.append("name", formData.profile.name)
       submitData.append("bio", formData.profile.bio || "")
-			
+
       if (formData.profile.avatar) {
         submitData.append("avatar", formData.profile.avatar)
       }
