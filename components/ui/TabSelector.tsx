@@ -20,7 +20,7 @@ export default function TabSelector({
           key={tab}
           type="button"
           onClick={() => onSelectTab(tab)}
-          className={`flex-1 basis-0 relative text-sm z-10 rounded-full transition-colors ${
+          className={`flex-1 basis-0 relative text-xs z-10 rounded-full transition-colors ${
             selectedTab === tab
               ? "text-black"
               : "text-neutral-400 hover:text-white"

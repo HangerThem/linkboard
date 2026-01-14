@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { writeFile, mkdir } from "fs/promises"
 import path from "path"
-import { ProfileSchema } from "@/types/Profile"
+import { ProfileCreateSchema, ProfileSchema } from "@/types/Profile"
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,12 +11,10 @@ export async function POST(request: NextRequest) {
     const bio = formData.get("bio") as string
     const avatar = formData.get("avatar") as File | null
 
-    const validatedProfile = ProfileSchema.omit({
-      id: true,
-      createdAt: true,
-    }).safeParse({
+    const validatedProfile = ProfileCreateSchema.safeParse({
       name: name?.trim(),
       bio: bio?.trim() || undefined,
+      avatar: avatar || undefined,
     })
 
     if (!validatedProfile.success) {

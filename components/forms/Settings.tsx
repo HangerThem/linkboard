@@ -183,16 +183,16 @@ export default function SettingsForm({ data }: SettingsFormProps) {
               </span>
             )}
           </div>
-        </Section>
 
-        <FormButton
-          type="submit"
-          variant="primary"
-          fullWidth
-          disabled={shouldDisableSubmit()}
-        >
-          Save Changes
-        </FormButton>
+          <FormButton
+            type="submit"
+            variant="primary"
+            fullWidth
+            disabled={shouldDisableSubmit()}
+          >
+            Save Changes
+          </FormButton>
+        </Section>
       </form>
     </div>
   )

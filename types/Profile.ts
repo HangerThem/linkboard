@@ -16,7 +16,6 @@ export type Profile = z.infer<typeof ProfileSchema>
 export const ProfileCreateSchema = ProfileSchema.omit({
   id: true,
   createdAt: true,
-  avatar: true,
 }).extend({
   avatar: z.instanceof(File).optional(),
 })

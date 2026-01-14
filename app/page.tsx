@@ -59,7 +59,7 @@ export default async function Page() {
             {profile.name}
           </h2>
           {profile.bio && (
-            <p className="mt-2 text-center text-neutral-400">{profile.bio}</p>
+            <p className="mt-2 text-center text-neutral-400 whitespace-pre-line">{profile.bio}</p>
           )}
         </div>
 

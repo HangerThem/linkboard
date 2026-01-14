@@ -1,11 +1,8 @@
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/react"
-import data from "@/config"
-import ThemeContext from "@/context/themeContext"
 import "./global.css"
 
 export const metadata: Metadata = {
-  title: data.title,
   icons: ["/profile.png"],
   description: "LinkBoard - A simple and customizable link board application.",
   authors: [
@@ -27,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-black text-white">
-        <ThemeContext>{children}</ThemeContext>
+        {children}
         <Analytics />
       </body>
     </html>

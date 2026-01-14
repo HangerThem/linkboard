@@ -858,16 +858,16 @@ export default function Editor({ data }: EditorProps) {
           ) : (
             <EmptyState message="No links or groups yet" />
           )}
-        </Section>
 
-        <FormButton
-          type="submit"
-          variant="primary"
-          fullWidth
-          disabled={shouldDisableSubmit()}
-        >
-          Save Changes
-        </FormButton>
+          <FormButton
+            type="submit"
+            variant="primary"
+            fullWidth
+            disabled={shouldDisableSubmit()}
+          >
+            Save Changes
+          </FormButton>
+        </Section>
       </form>
     </div>
   )

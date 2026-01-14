@@ -118,7 +118,6 @@ export default function ProfileForm({ data }: ProfileFormProps) {
             className="p-4 bg-neutral-800/50 border border-neutral-800 rounded-lg"
           >
             <div className="flex gap-6">
-              {/* Avatar Upload - Left Side */}
               <div className="flex flex-col items-center gap-2">
                 <input
                   type="file"
@@ -130,7 +129,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 <motion.button
                   type="button"
                   onClick={handleAvatarClick}
-                  className="relative w-24 h-24 rounded-full bg-neutral-800 border-2 border-dashed border-neutral-600 hover:border-neutral-500 transition-colors flex items-center justify-center overflow-hidden group"
+                  className="relative w-48 h-48 rounded-2xl bg-neutral-800 border-2 border-dashed border-neutral-600 hover:border-neutral-500 transition-colors flex items-center justify-center overflow-hidden group"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -175,9 +174,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 )}
               </div>
 
-              {/* Name and Bio - Right Side */}
               <div className="flex-1 flex flex-col gap-4">
-                {/* Name Input */}
                 <div className="flex flex-col gap-1">
                   <label className="text-neutral-400 text-xs uppercase tracking-wider">
                     Name
@@ -195,7 +192,6 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                   )}
                 </div>
 
-                {/* Bio Input */}
                 <div className="flex flex-col gap-1">
                   <label className="text-neutral-400 text-xs uppercase tracking-wider">
                     Bio
@@ -204,7 +200,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                     {...register("profile.bio")}
                     placeholder="A short bio about yourself"
                     rows={3}
-                    className="w-full px-3 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white text-sm placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors resize-none"
+                    className="w-full h-24 px-3 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white text-sm placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors resize-none"
                   />
                   {errors.profile?.bio && (
                     <span className="text-red-500 text-xs">
@@ -215,16 +211,16 @@ export default function ProfileForm({ data }: ProfileFormProps) {
               </div>
             </div>
           </motion.div>
-        </Section>
 
-        <FormButton
-          type="submit"
-          variant="primary"
-          fullWidth
-          disabled={shouldDisableSubmit()}
-        >
-          Save Changes
-        </FormButton>
+          <FormButton
+            type="submit"
+            variant="primary"
+            fullWidth
+            disabled={shouldDisableSubmit()}
+          >
+            Save Changes
+          </FormButton>
+        </Section>
       </form>
     </div>
   )

@@ -44,22 +44,17 @@ export default async function EditorPage() {
         LinkBoard Editor
       </h1>
       <p className="mb-12 text-center text-neutral-500">
-        Manage your links and settings here.
+        Use the forms below to customize your LinkBoard profile, links, and
+        settings.
       </p>
 
-      <h2 className="mb-8 text-center text-3xl font-bold text-white">
-        Profile
-      </h2>
-      <ProfileForm data={profile} />
+      <div className="space-y-8">
+        <ProfileForm data={profile} />
 
-      <h2 className="mb-8 text-center text-3xl font-bold text-white">Links</h2>
-      <Editor data={{ normalLinks, topLinks, linkGroups }} />
+        <Editor data={{ normalLinks, topLinks, linkGroups }} />
 
-      <h2 className="mb-8 text-center text-3xl font-bold text-white mt-16">
-        Settings
-      </h2>
-
-      <SettingsForm data={settings} />
+        <SettingsForm data={settings} />
+      </div>
     </main>
   )
 }
