@@ -4,95 +4,104 @@ import { NormalLinkSchema } from "@/types/NormalLink"
 import { LinkGroupSchema } from "@/types/LinkGroup"
 
 export async function POST(req: NextRequest) {
-  const body = await req.json()
+  try {
+    const body = await req.json()
 
-  const validatedNormalLinks = NormalLinkSchema.array().safeParse(
-    body.normalLinks
-  )
-  const validatedLinkGroups = LinkGroupSchema.array().safeParse(body.linkGroups)
+    const validatedNormalLinks = NormalLinkSchema.array().safeParse(
+      body.normalLinks
+    )
+    const validatedLinkGroups = LinkGroupSchema.array().safeParse(
+      body.linkGroups
+    )
 
-  if (!validatedNormalLinks.success || !validatedLinkGroups.success) {
-    return NextResponse.json(
-      {
-        error: "Invalid link data",
-        details: {
-          normalLinks: validatedNormalLinks.success
-            ? null
-            : validatedNormalLinks.error.message,
-          linkGroups: validatedLinkGroups.success
-            ? null
-            : validatedLinkGroups.error.message,
+    if (!validatedNormalLinks.success || !validatedLinkGroups.success) {
+      return NextResponse.json(
+        {
+          error: "Invalid link data",
+          details: {
+            normalLinks: validatedNormalLinks.success
+              ? null
+              : validatedNormalLinks.error.message,
+            linkGroups: validatedLinkGroups.success
+              ? null
+              : validatedLinkGroups.error.message,
+          },
+        },
+        { status: 400 }
+      )
+    }
+    await prisma.$transaction(async (tx) => {
+      await tx.normalLink.deleteMany()
+      await tx.linkGroup.deleteMany()
+
+      const linkGroupsData = []
+      for (const group of validatedLinkGroups.data) {
+        const { links, ...groupData } = group
+        const createdGroup = await tx.linkGroup.create({
+          data: {
+            id: groupData.id,
+            name: groupData.name,
+            icon: groupData.icon,
+            order: groupData.order ?? 0,
+            links: {
+              create:
+                links?.map((link, linkIndex) => ({
+                  id: link.id,
+                  title: link.title,
+                  url: link.url,
+                  icon: link.icon,
+                  order: link.order ?? linkIndex,
+                })) || [],
+            },
+          },
+          include: {
+            links: {
+              orderBy: { order: "asc" },
+            },
+          },
+        })
+        linkGroupsData.push(createdGroup)
+      }
+
+      const ungroupedLinks = validatedNormalLinks.data.filter(
+        (link) => !link.linkGroupId
+      )
+
+      await tx.normalLink.createMany({
+        data: ungroupedLinks.map((link, index) => ({
+          id: link.id,
+          title: link.title,
+          url: link.url,
+          icon: link.icon,
+          linkGroupId: null,
+          order: link.order ?? index,
+        })),
+      })
+    })
+
+    const normalLinks = await prisma.normalLink.findMany({
+      where: { linkGroupId: null },
+      orderBy: { order: "asc" },
+    })
+    const linkGroups = await prisma.linkGroup.findMany({
+      include: {
+        links: {
+          orderBy: { order: "asc" },
         },
       },
-      { status: 400 }
-    )
-  }
-  await prisma.$transaction(async (tx) => {
-    await tx.normalLink.deleteMany()
-    await tx.linkGroup.deleteMany()
+      orderBy: { order: "asc" },
+    })
 
-    const linkGroupsData = []
-    for (const group of validatedLinkGroups.data) {
-      const { links, ...groupData } = group
-      const createdGroup = await tx.linkGroup.create({
-        data: {
-          id: groupData.id,
-          name: groupData.name,
-          icon: groupData.icon,
-          order: groupData.order ?? 0,
-          links: {
-            create:
-              links?.map((link, linkIndex) => ({
-                id: link.id,
-                title: link.title,
-                url: link.url,
-                icon: link.icon,
-                order: link.order ?? linkIndex,
-              })) || [],
-          },
-        },
-        include: {
-          links: {
-            orderBy: { order: "asc" },
-          },
-        },
-      })
-      linkGroupsData.push(createdGroup)
+    const data = {
+      normalLinks,
+      linkGroups,
     }
 
-    const ungroupedLinks = validatedNormalLinks.data.filter(
-      (link) => !link.linkGroupId
+    return NextResponse.json({ data }, { status: 200 })
+  } catch (error) {
+    return NextResponse.json(
+      { error: "An unexpected error occurred." },
+      { status: 500 }
     )
-
-    await tx.normalLink.createMany({
-      data: ungroupedLinks.map((link, index) => ({
-        id: link.id,
-        title: link.title,
-        url: link.url,
-        icon: link.icon,
-        linkGroupId: null,
-        order: link.order ?? index,
-      })),
-    })
-  })
-
-  const normalLinks = await prisma.normalLink.findMany({
-    where: { linkGroupId: null },
-    orderBy: { order: "asc" },
-  })
-  const linkGroups = await prisma.linkGroup.findMany({
-    include: {
-      links: {
-        orderBy: { order: "asc" },
-      },
-    },
-    orderBy: { order: "asc" },
-  })
-
-  const data = {
-    normalLinks,
-    linkGroups,
   }
-
-  return NextResponse.json({ data }, { status: 200 })
 }
