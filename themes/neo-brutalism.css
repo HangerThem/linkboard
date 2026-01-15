@@ -1,0 +1,44 @@
+/* Neo-brutalism theme */
+[data-theme="neo-brutalism"] {
+  --background: 255 247 237;
+  --foreground: 0 0 0;
+
+  --card: 255 255 255;
+  --card-border: 0 0 0;
+  --card-hover: 254 243 199;
+
+  --text-primary: 0 0 0;
+  --text-secondary: 0 0 0;
+  --text-muted: 82 82 91;
+
+  --accent: 250 204 21;
+  --accent-foreground: 0 0 0;
+  --accent-hover: 234 179 8;
+
+  --button-primary: 250 204 21;
+  --button-primary-text: 0 0 0;
+  --button-secondary: 255 255 255;
+  --button-secondary-text: 0 0 0;
+  --button-secondary-border: 0 0 0;
+
+  --danger: 239 68 68;
+  --danger-hover: 220 38 38;
+  --success: 34 197 94;
+
+  --border: 0 0 0;
+  --border-hover: 0 0 0;
+  --border-dashed: 0 0 0;
+
+  --overlay: 0 0 0 / 0.7;
+
+  --icon-bg: 167 243 208;
+  --icon-border: 0 0 0;
+
+  --radius: 0;
+  --radius-lg: 0;
+  --radius-full: 0;
+  --border-width: 3px;
+  --shadow: 4px 4px 0 0 rgb(0 0 0);
+  --shadow-lg: 8px 8px 0 0 rgb(0 0 0);
+  --font-family: "Space Mono", "Courier New", monospace;
+}

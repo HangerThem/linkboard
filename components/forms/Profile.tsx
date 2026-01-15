@@ -125,7 +125,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.15 }}
-            className="p-4 theme-link-card-nested"
+            className="p-4 theme-link-card-nested h-64"
           >
             <div className="flex gap-6">
               <div className="flex flex-col items-center gap-2">
@@ -139,7 +139,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 <motion.button
                   type="button"
                   onClick={handleAvatarClick}
-                  className="relative w-48 h-48 theme-bg-card border-2 border-dashed theme-border hover:theme-border-hover transition-colors flex items-center justify-center overflow-hidden group"
+                  className="relative w-56 h-56 theme-bg-card border-2 border-dashed theme-border hover:theme-border-hover transition-colors flex items-center justify-center overflow-hidden group"
                   style={{ borderRadius: "var(--radius-lg)" }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}

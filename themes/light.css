@@ -1,0 +1,39 @@
+/* Light theme */
+[data-theme="light"] {
+  --background: 250 250 250;
+  --foreground: 23 23 23;
+
+  --card: 255 255 255;
+  --card-border: 229 229 229;
+  --card-hover: 245 245 245;
+
+  --text-primary: 23 23 23;
+  --text-secondary: 64 64 64;
+  --text-muted: 163 163 163;
+
+  --accent: 23 23 23;
+  --accent-foreground: 255 255 255;
+  --accent-hover: 38 38 38;
+
+  --button-primary: 23 23 23;
+  --button-primary-text: 255 255 255;
+  --button-secondary: 255 255 255;
+  --button-secondary-text: 23 23 23;
+  --button-secondary-border: 212 212 212;
+
+  --danger: 220 38 38;
+  --danger-hover: 185 28 28;
+  --success: 22 163 74;
+
+  --border: 229 229 229;
+  --border-hover: 212 212 212;
+  --border-dashed: 212 212 212;
+
+  --overlay: 0 0 0 / 0.5;
+
+  --icon-bg: 245 245 245;
+  --icon-border: 229 229 229;
+
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+}

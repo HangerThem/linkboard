@@ -5,23 +5,16 @@ import {
   QrCode,
   Link45deg,
   CodeSquare,
-  X,
   Check,
 } from "react-bootstrap-icons"
-import Image from "next/image"
 import { useState, useRef, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import QRCodeModal from "@/components/modal/QRCodeModal"
 
 const springTransition = {
   type: "spring" as const,
   stiffness: 400,
   damping: 25,
-}
-
-const smoothSpring = {
-  type: "spring" as const,
-  stiffness: 300,
-  damping: 30,
 }
 
 const containerVariants = {
@@ -65,13 +58,11 @@ const shareButtons = [
 ]
 
 export default function ShareBar() {
-  const dialogRef = useRef<HTMLDialogElement>(null)
-  const dialogContentRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [shareOptionsOpen, setShareOptionsOpen] = useState<boolean>(false)
   const [currentUrl, setCurrentUrl] = useState<string>("")
   const [copied, setCopied] = useState<string | null>(null)
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false)
+  const [qrModalOpen, setQrModalOpen] = useState<boolean>(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
@@ -88,15 +79,11 @@ export default function ShareBar() {
   }, [])
 
   const handleOpenQR = useCallback(() => {
-    dialogRef.current?.showModal()
-    requestAnimationFrame(() => {
-      setDialogOpen(true)
-    })
+    setQrModalOpen(true)
   }, [])
 
   const handleCloseQR = useCallback(() => {
-    setDialogOpen(false)
-    setTimeout(() => dialogRef.current?.close(), 200)
+    setQrModalOpen(false)
   }, [])
 
   const handleCopyLink = () => {
@@ -145,22 +132,6 @@ export default function ShareBar() {
   }, [shareOptionsOpen, resetTimeout])
 
   useEffect(() => {
-    const dialog = dialogRef.current
-    if (!dialog) return
-
-    const handleDialogClick = (event: MouseEvent) => {
-      if (event.target === dialog) {
-        handleCloseQR()
-      }
-    }
-
-    dialog.addEventListener("click", handleDialogClick)
-    return () => {
-      dialog.removeEventListener("click", handleDialogClick)
-    }
-  }, [handleCloseQR])
-
-  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         containerRef.current &&
@@ -178,67 +149,11 @@ export default function ShareBar() {
 
   return (
     <>
-      <dialog
-        ref={dialogRef}
-        className="backdrop:theme-overlay bg-transparent border-none outline-none p-0 m-auto"
-      >
-        <AnimatePresence mode="wait">
-          {dialogOpen && (
-            <motion.div
-              ref={dialogContentRef}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={smoothSpring}
-              className="theme-modal space-y-5"
-            >
-              <div className="flex items-center justify-between">
-                <motion.h3
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1, ...smoothSpring }}
-                  className="theme-text-primary font-semibold text-lg"
-                >
-                  Scan QR Code
-                </motion.h3>
-                <motion.button
-                  onClick={handleCloseQR}
-                  className="theme-modal-close-btn"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={springTransition}
-                >
-                  <X size={20} />
-                </motion.button>
-              </div>
-              {currentUrl && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.15, ...smoothSpring }}
-                  className="theme-qr-container"
-                >
-                  <Image
-                    src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${currentUrl}`}
-                    alt="QR Code"
-                    width={180}
-                    height={180}
-                    style={{ borderRadius: "var(--radius)" }}
-                  />
-                </motion.div>
-              )}
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.25 }}
-                className="theme-text-muted text-xs text-center"
-              >
-                Point your camera to open this page
-              </motion.p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </dialog>
+      <QRCodeModal
+        open={qrModalOpen}
+        url={currentUrl}
+        handleClose={handleCloseQR}
+      />
 
       <div ref={containerRef} className="fixed top-6 right-6 z-50">
         <div className="flex items-center gap-3">
@@ -317,7 +232,7 @@ export default function ShareBar() {
               animate={{
                 rotate: shareOptionsOpen ? 180 : 0,
               }}
-              transition={smoothSpring}
+              transition={springTransition}
               className="theme-share-icon"
             >
               <Share size={18} />

@@ -1,0 +1,44 @@
+/* Default theme variables */
+:root {
+  --background: 0 0 0;
+  --foreground: 255 255 255;
+
+  --card: 23 23 23;
+  --card-border: 38 38 38;
+  --card-hover: 38 38 38;
+
+  --text-primary: 255 255 255;
+  --text-secondary: 229 229 229;
+  --text-muted: 115 115 115;
+
+  --accent: 255 255 255;
+  --accent-foreground: 0 0 0;
+  --accent-hover: 229 229 229;
+
+  --button-primary: 255 255 255;
+  --button-primary-text: 0 0 0;
+  --button-secondary: 38 38 38;
+  --button-secondary-text: 255 255 255;
+  --button-secondary-border: 64 64 64;
+
+  --danger: 220 38 38;
+  --danger-hover: 185 28 28;
+  --success: 34 197 94;
+
+  --border: 38 38 38;
+  --border-hover: 64 64 64;
+  --border-dashed: 38 38 38;
+
+  --overlay: 0 0 0 / 0.8;
+
+  --icon-bg: 38 38 38;
+  --icon-border: 64 64 64;
+
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+  --font-family: "K2D", sans-serif;
+}
