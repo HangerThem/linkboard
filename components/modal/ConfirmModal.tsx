@@ -39,7 +39,7 @@ export default function ConfirmModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 theme-overlay"
             onClick={handleClose}
           />
 
@@ -49,18 +49,20 @@ export default function ConfirmModal({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-xl p-6"
+              className="w-full max-w-md theme-modal"
               ref={modalRef}
             >
-              <h3 className="text-white text-xl font-medium mb-4">{title}</h3>
-              <p className="text-neutral-400 mb-6">{message}</p>
+              <h3 className="theme-text-primary text-xl font-medium mb-4">
+                {title}
+              </h3>
+              <p className="theme-text-muted mb-6">{message}</p>
               <div className="flex justify-end gap-4">
                 <motion.button
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={handleClose}
-                  className="px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-lg text-neutral-400 hover:bg-neutral-800/80 hover:text-white transition-colors"
+                  className="theme-btn-secondary"
                 >
                   {cancelText}
                 </motion.button>
@@ -72,7 +74,7 @@ export default function ConfirmModal({
                     handleConfirm()
                     handleClose()
                   }}
-                  className="px-4 py-2 bg-red-600 border border-red-700 rounded-lg text-white hover:bg-red-700 transition-colors"
+                  className="theme-btn-danger"
                 >
                   {confirmText}
                 </motion.button>

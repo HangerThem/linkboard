@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <div>
-      <span>Loading...</span>
+    <div className="flex items-center justify-center p-8">
+      <span className="theme-text-muted animate-pulse">Loading...</span>
     </div>
   )
 }

@@ -14,17 +14,14 @@ export default function TabSelector({
   onSelectTab,
 }: TabSelectorProps) {
   return (
-    <div className="relative h-10 inline-flex w-72 bg-neutral-800 rounded-full">
+    <div className="theme-tab-selector">
       {tabs.map((tab) => (
         <button
           key={tab}
           type="button"
           onClick={() => onSelectTab(tab)}
-          className={`flex-1 basis-0 relative text-xs z-10 rounded-full transition-colors ${
-            selectedTab === tab
-              ? "text-black"
-              : "text-neutral-400 hover:text-white"
-          }`}
+          className="theme-tab-button"
+          data-selected={selectedTab === tab}
         >
           {tab.toLowerCase().replace(/^\w/, (c) => c.toUpperCase())}
         </button>
@@ -32,7 +29,7 @@ export default function TabSelector({
       <motion.div
         layoutId="tab-indicator"
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
-        className="absolute top-1 w-full h-8 bg-white rounded-full"
+        className="theme-tab-indicator"
         style={{
           width: `calc(${100 / tabs.length}% - 0.5rem)`,
           left: `calc(${

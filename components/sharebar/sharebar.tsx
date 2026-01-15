@@ -180,7 +180,7 @@ export default function ShareBar() {
     <>
       <dialog
         ref={dialogRef}
-        className="backdrop:bg-black/60 backdrop:backdrop-blur-sm bg-transparent border-none outline-none p-0 m-auto"
+        className="backdrop:theme-overlay bg-transparent border-none outline-none p-0 m-auto"
       >
         <AnimatePresence mode="wait">
           {dialogOpen && (
@@ -190,20 +190,20 @@ export default function ShareBar() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={smoothSpring}
-              className="bg-neutral-900/95 backdrop-blur-xl border border-neutral-700/50 rounded-3xl p-6 space-y-5 shadow-2xl shadow-black/50"
+              className="theme-modal space-y-5"
             >
               <div className="flex items-center justify-between">
                 <motion.h3
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1, ...smoothSpring }}
-                  className="text-white font-semibold text-lg"
+                  className="theme-text-primary font-semibold text-lg"
                 >
                   Scan QR Code
                 </motion.h3>
                 <motion.button
                   onClick={handleCloseQR}
-                  className="p-2 text-neutral-400 hover:text-white transition-all duration-200 rounded-xl hover:bg-neutral-800/80"
+                  className="theme-modal-close-btn"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   transition={springTransition}
@@ -216,14 +216,14 @@ export default function ShareBar() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.15, ...smoothSpring }}
-                  className="bg-white p-4 rounded-2xl shadow-lg"
+                  className="theme-qr-container"
                 >
                   <Image
                     src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${currentUrl}`}
                     alt="QR Code"
                     width={180}
                     height={180}
-                    className="rounded-xl"
+                    style={{ borderRadius: "var(--radius)" }}
                   />
                 </motion.div>
               )}
@@ -231,7 +231,7 @@ export default function ShareBar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.25 }}
-                className="text-neutral-500 text-xs text-center"
+                className="theme-text-muted text-xs text-center"
               >
                 Point your camera to open this page
               </motion.p>
@@ -252,7 +252,7 @@ export default function ShareBar() {
                 className="overflow-hidden h-12"
               >
                 <motion.div
-                  className="h-12 flex items-center gap-1.5 bg-neutral-900/90 backdrop-blur-xl border border-neutral-700/50 rounded-full px-2 py-2 shadow-xl shadow-black/20"
+                  className="theme-share-options"
                   variants={containerVariants}
                   initial="hidden"
                   animate="visible"
@@ -266,36 +266,35 @@ export default function ShareBar() {
                         key={button.id}
                         variants={buttonVariants}
                         onClick={() => handleButtonClick(button.id)}
-                        className={`relative p-2 rounded-full transition-colors duration-200 ${
-                          isCopied
-                            ? "bg-neutral-500/20 text-neutral-400"
-                            : "text-neutral-400 hover:text-white hover:bg-neutral-700/50"
-                        }`}
+                        className="theme-share-option-btn"
+                        data-copied={isCopied}
                         whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.9 }}
                         title={button.label}
                       >
                         <AnimatePresence mode="wait">
                           {isCopied ? (
-                            <motion.div
+                            <motion.span
                               key="check"
                               initial={{ scale: 0, rotate: -180 }}
                               animate={{ scale: 1, rotate: 0 }}
                               exit={{ scale: 0, rotate: 180 }}
                               transition={springTransition}
+                              className="theme-share-icon text-green-500"
                             >
                               <Check size={18} />
-                            </motion.div>
+                            </motion.span>
                           ) : (
-                            <motion.div
+                            <motion.span
                               key="icon"
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
                               exit={{ scale: 0 }}
                               transition={springTransition}
+                              className="theme-share-icon"
                             >
                               <button.icon size={18} />
-                            </motion.div>
+                            </motion.span>
                           )}
                         </AnimatePresence>
                       </motion.button>
@@ -308,24 +307,26 @@ export default function ShareBar() {
 
           <motion.button
             onClick={handleOpenShareOptions}
-            className="relative h-12 w-12 flex items-center justify-center bg-neutral-900/90 backdrop-blur-xl border border-neutral-700/50 text-neutral-400 hover:text-white hover:border-neutral-600 rounded-full transition-all duration-300 shadow-xl shadow-black/20"
+            className="theme-share-btn"
             whileHover={{
-              boxShadow: "0 0 20px rgba(255,255,255,0.1)",
+              boxShadow: "var(--shadow-lg)",
             }}
             transition={springTransition}
           >
-            <motion.div
+            <motion.span
               animate={{
                 rotate: shareOptionsOpen ? 180 : 0,
               }}
               transition={smoothSpring}
+              className="theme-share-icon"
             >
               <Share size={18} />
-            </motion.div>
+            </motion.span>
 
             {!shareOptionsOpen && (
               <motion.div
-                className="absolute inset-0 rounded-full border border-neutral-600/50"
+                className="absolute inset-0 theme-border border"
+                style={{ borderRadius: "var(--radius-full)" }}
                 initial={{ scale: 1, opacity: 0.5 }}
                 animate={{
                   scale: [1, 1.3, 1],

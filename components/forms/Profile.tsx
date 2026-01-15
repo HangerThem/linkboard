@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState, useRef } from "react"
-import z from "zod"
+import z, { set } from "zod"
 import { Profile, ProfileCreate, ProfileCreateSchema } from "@/types/Profile"
 import Section from "@/components/ui/Section"
 import FormButton from "@/components/ui/FormButton"
@@ -23,6 +23,7 @@ interface ProfileFormProps {
 
 export default function ProfileForm({ data }: ProfileFormProps) {
   const [profileOpen, setProfileOpen] = useState(true)
+  const [originalData, setOriginalData] = useState(data)
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -36,8 +37,8 @@ export default function ProfileForm({ data }: ProfileFormProps) {
     resolver: zodResolver(FormDataSchema),
     defaultValues: {
       profile: {
-        name: data.name,
-        bio: data.bio || "",
+        name: originalData.name,
+        bio: originalData.bio || "",
         avatar: undefined,
       },
     },
@@ -47,7 +48,8 @@ export default function ProfileForm({ data }: ProfileFormProps) {
 
   const shouldDisableSubmit = () => {
     const profileChanged =
-      data.name !== profile.name || (data.bio || "") !== (profile.bio || "")
+      originalData.name !== profile.name ||
+      (originalData.bio || "") !== (profile.bio || "")
     const avatarFile = watch("profile.avatar")
     const avatarChanged = Boolean(avatarFile && avatarFile.size > 0)
     return !profileChanged && !avatarChanged
@@ -96,6 +98,14 @@ export default function ProfileForm({ data }: ProfileFormProps) {
         throw new Error("Failed to save profile")
       }
 
+      const responseData = await response.json().then((res) => res.data)
+
+      setOriginalData(responseData.profile)
+      setValue("profile.name", responseData.profile.name)
+      setValue("profile.bio", responseData.profile.bio || "")
+      setValue("profile.avatar", undefined)
+      setAvatarPreview(null)
+
       alert("Profile saved successfully!")
     } catch (error) {
       console.error(error)
@@ -115,7 +125,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.15 }}
-            className="p-4 bg-neutral-800/50 border border-neutral-800 rounded-lg"
+            className="p-4 theme-link-card-nested"
           >
             <div className="flex gap-6">
               <div className="flex flex-col items-center gap-2">
@@ -129,7 +139,8 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 <motion.button
                   type="button"
                   onClick={handleAvatarClick}
-                  className="relative w-48 h-48 rounded-2xl bg-neutral-800 border-2 border-dashed border-neutral-600 hover:border-neutral-500 transition-colors flex items-center justify-center overflow-hidden group"
+                  className="relative w-48 h-48 theme-bg-card border-2 border-dashed theme-border hover:theme-border-hover transition-colors flex items-center justify-center overflow-hidden group"
+                  style={{ borderRadius: "var(--radius-lg)" }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -147,7 +158,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                   ) : data.avatar ? (
                     <>
                       <Image
-                        src={`/${data.avatar}`}
+                        src={data.avatar}
                         alt="Current Avatar"
                         fill
                         className="object-cover"
@@ -157,7 +168,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                       </div>
                     </>
                   ) : (
-                    <div className="flex flex-col items-center gap-1 text-neutral-500">
+                    <div className="flex flex-col items-center gap-1 theme-text-muted">
                       <Icon name="PersonCircle" size={32} />
                       <span className="text-xs">Upload</span>
                     </div>
@@ -167,7 +178,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                   <button
                     type="button"
                     onClick={handleRemoveAvatar}
-                    className="text-xs text-neutral-500 hover:text-red-400 transition-colors"
+                    className="text-xs theme-text-muted hover:text-red-400 transition-colors"
                   >
                     Remove
                   </button>
@@ -176,14 +187,14 @@ export default function ProfileForm({ data }: ProfileFormProps) {
 
               <div className="flex-1 flex flex-col gap-4">
                 <div className="flex flex-col gap-1">
-                  <label className="text-neutral-400 text-xs uppercase tracking-wider">
+                  <label className="theme-text-muted text-xs uppercase tracking-wider">
                     Name
                   </label>
                   <input
                     type="text"
                     {...register("profile.name")}
                     placeholder="Your name"
-                    className="w-full px-3 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white text-sm placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors"
+                    className="theme-input"
                   />
                   {errors.profile?.name && (
                     <span className="text-red-500 text-xs">
@@ -193,14 +204,14 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                 </div>
 
                 <div className="flex flex-col gap-1">
-                  <label className="text-neutral-400 text-xs uppercase tracking-wider">
+                  <label className="theme-text-muted text-xs uppercase tracking-wider">
                     Bio
                   </label>
                   <textarea
                     {...register("profile.bio")}
                     placeholder="A short bio about yourself"
                     rows={3}
-                    className="w-full h-24 px-3 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-white text-sm placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors resize-none"
+                    className="theme-input h-24 resize-none"
                   />
                   {errors.profile?.bio && (
                     <span className="text-red-500 text-xs">

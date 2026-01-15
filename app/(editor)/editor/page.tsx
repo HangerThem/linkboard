@@ -1,6 +1,8 @@
-import Editor from "@/components/forms/Editor"
+import NormalLinks from "@/components/forms/NormalLinks"
+import Editor from "@/components/forms/NormalLinks"
 import ProfileForm from "@/components/forms/Profile"
 import SettingsForm from "@/components/forms/Settings"
+import TopLinks from "@/components/forms/TopLinks"
 import Icon from "@/components/icon"
 import prisma from "@/lib/prisma"
 import Link from "next/link"
@@ -35,15 +37,15 @@ export default async function EditorPage() {
       <Link
         href="/"
         title="Back to LinkBoard"
-        className="fixed bottom-4 right-4 z-50 bg-neutral-800/50 border border-neutral-700 rounded-full p-3 hover:bg-neutral-800 transition-colors"
+        className="theme-floating-btn bottom-4 right-4"
       >
         <Icon name="ArrowLeft" size={24} />
       </Link>
 
-      <h1 className="mb-8 text-center text-4xl font-bold text-white">
+      <h1 className="mb-8 text-center text-4xl font-bold theme-text-primary">
         LinkBoard Editor
       </h1>
-      <p className="mb-12 text-center text-neutral-500">
+      <p className="mb-12 text-center theme-text-muted">
         Use the forms below to customize your LinkBoard profile, links, and
         settings.
       </p>
@@ -51,7 +53,9 @@ export default async function EditorPage() {
       <div className="space-y-8">
         <ProfileForm data={profile} />
 
-        <Editor data={{ normalLinks, topLinks, linkGroups }} />
+        <TopLinks data={topLinks} />
+
+        <NormalLinks data={{ normalLinks, linkGroups }} />
 
         <SettingsForm data={settings} />
       </div>

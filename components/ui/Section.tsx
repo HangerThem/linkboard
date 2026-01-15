@@ -22,7 +22,7 @@ export default function Section({
   action,
 }: SectionProps) {
   return (
-    <section className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+    <section className="theme-section">
       <div className="flex items-center justify-between p-4">
         <button
           type="button"
@@ -33,13 +33,13 @@ export default function Section({
             animate={{ rotate: isOpen ? 90 : 0 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
           >
-            <Icons.ChevronRight size={16} className="text-neutral-500" />
+            <Icons.ChevronRight size={16} className="theme-text-muted" />
           </motion.div>
-          <span className="text-sm font-medium uppercase tracking-widest text-neutral-400 group-hover:text-neutral-300 transition-colors">
+          <span className="text-sm font-medium uppercase tracking-widest theme-text-muted group-hover:theme-text-secondary transition-colors">
             {title}
           </span>
           {count !== undefined && (
-            <span className="text-xs text-neutral-600 tabular-nums">
+            <span className="text-xs theme-text-muted tabular-nums">
               ({count})
             </span>
           )}

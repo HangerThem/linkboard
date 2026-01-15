@@ -1,4 +1,4 @@
-import { Density } from "@/prisma/generated/enums"
+import { Density, Theme } from "@/prisma/generated/enums"
 import z from "zod"
 
 export const SettingsSchema = z.object({
@@ -6,6 +6,7 @@ export const SettingsSchema = z.object({
   shareBar: z.boolean(),
   source: z.boolean(),
   density: z.enum(Density),
+  theme: z.enum(Theme),
 })
 
 export type Settings = z.infer<typeof SettingsSchema>

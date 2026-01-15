@@ -13,6 +13,13 @@ enum Density {
   SPACIOUS
 }
 
+enum Theme {
+  default
+  dark
+  light
+  neo_brutalism
+}
+
 model Profile {
   id        String   @id @default(cuid())
   name      String
@@ -54,5 +61,6 @@ model Setting {
   source    Boolean  @default(true)
   shareBar  Boolean  @default(true)
   density   Density  @default(COMFORTABLE)
+  theme     Theme    @default(default)
   createdAt DateTime @default(now())
 }

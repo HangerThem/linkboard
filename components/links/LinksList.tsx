@@ -95,9 +95,9 @@ export default function LinksList({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="text-center py-12 border border-dashed border-neutral-800 rounded-xl"
+        className="theme-empty-state"
       >
-        <p className="text-neutral-600 text-sm">No links yet</p>
+        <p className="theme-text-muted text-sm">No links yet</p>
       </motion.div>
     )
   }
@@ -115,24 +115,21 @@ export default function LinksList({
     >
       <Link href={link.url} target="_blank" rel="noopener noreferrer">
         <motion.div
-          className={`group flex items-center gap-4 ${getLinkSpacingClass()} bg-neutral-900 border border-neutral-800 rounded-xl hover:border-neutral-700 transition-colors`}
-          whileHover={{
-            scale: 1.02,
-            backgroundColor: "rgba(38, 38, 38, 1)",
-          }}
+          className={`group flex items-center gap-4 ${getLinkSpacingClass()} theme-link-card`}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           transition={{ duration: 0.15 }}
         >
           {link.icon && (
-            <div className="flex items-center justify-center w-10 h-10 bg-neutral-800 border border-neutral-700 rounded-lg group-hover:border-neutral-600 transition-colors">
+            <div className="theme-icon-container theme-icon-container-md">
               <Icon name={link.icon as keyof typeof Icons} size={20} />
             </div>
           )}
-          <span className="flex-1 font-medium text-neutral-200 group-hover:text-white transition-colors">
+          <span className="flex-1 font-medium theme-text-secondary group-hover:theme-text-primary transition-colors">
             {link.title}
           </span>
           <motion.div
-            className="text-neutral-600 group-hover:text-neutral-400 transition-colors"
+            className="theme-text-muted group-hover:theme-text-secondary transition-colors"
             initial={{ x: 0 }}
             whileHover={{ x: 4 }}
           >
@@ -153,28 +150,28 @@ export default function LinksList({
         delay: index * 0.05,
         ease: "easeOut",
       }}
-      className="border border-neutral-800 rounded-xl overflow-hidden"
+      className="theme-card overflow-hidden"
     >
-      <div className="bg-neutral-900 hover:bg-neutral-800/80 transition-colors">
+      <div className="theme-group-header">
         <motion.button
           className={`w-full flex items-center gap-4 ${getLinkSpacingClass()}`}
           onClick={() => toggleGroup(group.id)}
           whileTap={{ scale: 0.99 }}
         >
           {group.icon && (
-            <div className="flex items-center justify-center w-10 h-10 bg-neutral-800 border border-neutral-700 rounded-lg">
+            <div className="theme-icon-container theme-icon-container-md">
               <Icon name={group.icon as keyof typeof Icons} size={20} />
             </div>
           )}
-          <span className="flex-1 font-medium text-neutral-200 text-left">
+          <span className="flex-1 font-medium theme-text-secondary text-left">
             {group.name}
           </span>
-          <span className="text-sm text-neutral-500 mr-2">
+          <span className="text-sm theme-text-muted mr-2">
             {group.links?.length || 0} link
             {(group.links?.length || 0) !== 1 ? "s" : ""}
           </span>
           <motion.div
-            className="text-neutral-600"
+            className="theme-text-muted"
             animate={{ rotate: expandedGroups.has(group.id) ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
@@ -194,7 +191,7 @@ export default function LinksList({
               transition={{ duration: 0.2 }}
               className="overflow-hidden"
             >
-              <div className={`p-3 ${getSpacingClass()} bg-neutral-900/50`}>
+              <div className={`theme-group-content ${getSpacingClass()}`}>
                 {group.links.map((link, linkIndex) => (
                   <motion.div
                     key={link.id}
@@ -211,27 +208,24 @@ export default function LinksList({
                       rel="noopener noreferrer"
                     >
                       <motion.div
-                        className={`group flex items-center gap-3 ${getLinkSpacingClass()} bg-neutral-800/50 border border-neutral-800 rounded-lg hover:border-neutral-700 transition-colors`}
-                        whileHover={{
-                          scale: 1.01,
-                          backgroundColor: "rgba(38, 38, 38, 0.7)",
-                        }}
+                        className={`group flex items-center gap-3 ${getLinkSpacingClass()} theme-link-card-nested`}
+                        whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.98 }}
                         transition={{ duration: 0.15 }}
                       >
                         {link.icon && (
-                          <div className="flex items-center justify-center w-8 h-8 bg-neutral-800 border border-neutral-700 rounded-md group-hover:border-neutral-600 transition-colors">
+                          <div className="theme-icon-container theme-icon-container-sm">
                             <Icon
                               name={link.icon as keyof typeof Icons}
                               size={16}
                             />
                           </div>
                         )}
-                        <span className="flex-1 text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">
+                        <span className="flex-1 text-sm font-medium theme-text-secondary group-hover:theme-text-primary transition-colors">
                           {link.title}
                         </span>
                         <motion.div
-                          className="text-neutral-600 group-hover:text-neutral-400 transition-colors"
+                          className="theme-text-muted group-hover:theme-text-secondary transition-colors"
                           initial={{ x: 0 }}
                           whileHover={{ x: 4 }}
                         >

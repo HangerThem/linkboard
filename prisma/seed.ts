@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma"
-import { Density } from "./generated/enums"
+import { Density, Theme } from "./generated/enums"
 
 async function main() {
   await prisma.profile.deleteMany()
@@ -8,7 +8,7 @@ async function main() {
       id: "default",
       name: "Your Name",
       bio: "This is your bio.",
-			avatar: null,
+      avatar: null,
     },
   })
 
@@ -19,6 +19,7 @@ async function main() {
       shareBar: true,
       source: false,
       density: Density.COMFORTABLE,
+      theme: Theme.default,
     },
   })
 }

@@ -38,7 +38,7 @@ export default async function Page() {
         <Link
           href="/editor"
           title="Go to Editor"
-          className="fixed bottom-4 right-4 z-50 bg-neutral-800/50 border border-neutral-700 rounded-full p-3 hover:bg-neutral-800 transition-colors"
+          className="theme-floating-btn bottom-4 right-4"
         >
           <Icon name="PencilSquare" size={24} />
         </Link>
@@ -47,19 +47,22 @@ export default async function Page() {
       <main className="max-w-2xl mx-auto px-4 py-12 space-y-8">
         <div className="flex flex-col items-center space-y-4">
           {profile.avatar && (
-            <Image
-              src={`/${profile.avatar}`}
-              alt="Profile"
-              width={120}
-              height={120}
-              className="relative rounded-full border-2 border-neutral-800"
-            />
+            <div className="theme-profile-image w-48 h-48">
+              <Image
+                src={profile.avatar}
+                alt="Profile"
+                fill
+                className="object-cover"
+              />
+            </div>
           )}
-          <h2 className="mt-4 text-2xl font-bold text-white text-center">
+          <h2 className="mt-4 text-2xl font-bold theme-text-primary text-center">
             {profile.name}
           </h2>
           {profile.bio && (
-            <p className="mt-2 text-center text-neutral-400 whitespace-pre-line">{profile.bio}</p>
+            <p className="mt-2 text-center theme-text-muted whitespace-pre-line">
+              {profile.bio}
+            </p>
           )}
         </div>
 
@@ -70,7 +73,7 @@ export default async function Page() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 block"
+              className="p-3 block theme-text-secondary hover:theme-text-primary transition-colors"
             >
               {link.icon && (
                 <Icon name={link.icon as keyof typeof Icons} size={32} />

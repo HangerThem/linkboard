@@ -11,9 +11,9 @@ export default function EmptyState({ message }: EmptyStateProps) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="text-center py-8 border border-dashed border-neutral-800 rounded-lg"
+      className="theme-empty-state"
     >
-      <p className="text-neutral-600 text-sm">{message}</p>
+      <p className="theme-text-muted text-sm">{message}</p>
     </motion.div>
   )
 }

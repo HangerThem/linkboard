@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect, useRef, useState } from "react"
 import z from "zod"
 import { NormalLink, NormalLinkSchema } from "@/types/NormalLink"
-import { TopLink, TopLinkSchema } from "@/types/TopLink"
 import { LinkGroup, LinkGroupSchema } from "@/types/LinkGroup"
 import { ContentItem } from "@/types/ContentItem"
 import Sortable from "sortablejs"
@@ -20,7 +19,6 @@ import * as Icons from "react-bootstrap-icons"
 import ConfirmModal from "../modal/ConfirmModal"
 
 const FormDataSchema = z.object({
-  topLinks: TopLinkSchema.array(),
   contentItems: z.array(
     z.discriminatedUnion("type", [
       z.object({
@@ -39,7 +37,7 @@ const FormDataSchema = z.object({
 
 type FormData = z.infer<typeof FormDataSchema>
 
-type LinkType = "top" | "content" | "groupLink"
+type LinkType = "content" | "groupLink"
 
 interface IconSelectionContext {
   type: LinkType
@@ -49,7 +47,6 @@ interface IconSelectionContext {
 
 interface EditorProps {
   data: {
-    topLinks: TopLink[]
     normalLinks: NormalLink[]
     linkGroups?: LinkGroup[]
   }
@@ -82,14 +79,13 @@ function buildContentItems(
   return items.map((item, index) => ({ ...item, order: index }))
 }
 
-export default function Editor({ data }: EditorProps) {
+export default function NormalLinks({ data }: EditorProps) {
+  const [originalData, setOriginalData] = useState(data)
   const [iconsModalOpen, setIconsModalOpen] = useState(false)
   const [iconSelectionContext, setIconSelectionContext] =
     useState<IconSelectionContext | null>(null)
-  const topListRef = useRef<HTMLUListElement>(null)
   const contentListRef = useRef<HTMLDivElement>(null)
   const groupLinksRefs = useRef<Map<string, HTMLUListElement>>(new Map())
-  const topLinksSnapshot = useRef<TopLink[]>([])
   const contentSnapshot = useRef<ContentItem[]>([])
   const groupLinksSnapshots = useRef<Map<string, NormalLink[]>>(new Map())
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
@@ -98,8 +94,8 @@ export default function Editor({ data }: EditorProps) {
   )
 
   const initialContentItems = buildContentItems(
-    data.normalLinks,
-    data.linkGroups || []
+    originalData.normalLinks,
+    originalData.linkGroups || []
   )
 
   const {
@@ -111,14 +107,11 @@ export default function Editor({ data }: EditorProps) {
   } = useForm<FormData>({
     resolver: zodResolver(FormDataSchema),
     defaultValues: {
-      topLinks: data.topLinks,
       contentItems: initialContentItems,
     },
   })
 
-  const topLinks = watch("topLinks")
   const contentItems = watch("contentItems")
-  const [topLinksOpen, setTopLinksOpen] = useState(true)
   const [contentOpen, setContentOpen] = useState(true)
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => {
     const groups = contentItems.filter((item) => item.type === "group")
@@ -135,13 +128,6 @@ export default function Editor({ data }: EditorProps) {
       }
       return newSet
     })
-  }
-
-  const addTopLink = () => {
-    setValue("topLinks", [
-      ...topLinks,
-      { id: nanoid(), url: "", icon: "", order: topLinks.length } as TopLink,
-    ])
   }
 
   const addLink = () => {
@@ -207,13 +193,6 @@ export default function Editor({ data }: EditorProps) {
     setValue("contentItems", updatedItems)
   }
 
-  const removeTopLink = (index: number) => {
-    setValue(
-      "topLinks",
-      topLinks.filter((_, i) => i !== index)
-    )
-  }
-
   const removeContentItem = (index: number) => {
     const item = contentItems[index]
     if (item.type === "group") {
@@ -253,17 +232,33 @@ export default function Editor({ data }: EditorProps) {
   }
 
   const shouldDisableSubmit = () => {
-    const linksExist = topLinks.length > 0 || contentItems.length > 0
     const initialContent = buildContentItems(
-      data.normalLinks,
-      data.linkGroups || []
+      originalData.normalLinks,
+      originalData.linkGroups || []
     )
-    const changedFromInitial =
-      JSON.stringify(data.topLinks) !== JSON.stringify(topLinks) ||
-      JSON.stringify(initialContent) !== JSON.stringify(contentItems)
 
-    if (!changedFromInitial) return true
-    return !linksExist
+    const normalizeForComparison = (items: ContentItem[]) =>
+      items.map(({ order, ...rest }) => ({
+        ...rest,
+        data:
+          rest.type === "group"
+            ? {
+                ...(rest.data as LinkGroup),
+                links: (rest.data as LinkGroup).links?.map(
+                  ({ order: linkOrder, ...linkRest }) => linkRest
+                ),
+              }
+            : { ...(rest.data as NormalLink), order: undefined },
+      }))
+
+    const initialNormalized = JSON.stringify(
+      normalizeForComparison(initialContent)
+    )
+    const currentNormalized = JSON.stringify(
+      normalizeForComparison(contentItems)
+    )
+
+    return initialNormalized === currentNormalized
   }
 
   const handleIconSelect = (iconName: string) => {
@@ -271,14 +266,7 @@ export default function Editor({ data }: EditorProps) {
 
     const { type, itemIndex, linkIndex } = iconSelectionContext
 
-    if (type === "top" && itemIndex !== undefined) {
-      const updatedTopLinks = [...topLinks]
-      updatedTopLinks[itemIndex] = {
-        ...updatedTopLinks[itemIndex],
-        icon: iconName,
-      }
-      setValue("topLinks", updatedTopLinks)
-    } else if (type === "content" && itemIndex !== undefined) {
+    if (type === "content" && itemIndex !== undefined) {
       const item = contentItems[itemIndex]
       if (item.type === "link") {
         const updatedItems = [...contentItems]
@@ -330,26 +318,6 @@ export default function Editor({ data }: EditorProps) {
   }
 
   useEffect(() => {
-    if (!topListRef.current) return
-
-    const sortable = Sortable.create(topListRef.current, {
-      animation: 150,
-      handle: ".drag-handle",
-      onStart: () => {
-        topLinksSnapshot.current = [...topLinks]
-      },
-      onEnd: ({ oldIndex, newIndex }) => {
-        if (oldIndex == null || newIndex == null) return
-        const updated = [...topLinksSnapshot.current]
-        const [movedItem] = updated.splice(oldIndex, 1)
-        updated.splice(newIndex, 0, movedItem)
-        setValue("topLinks", updated)
-      },
-    })
-    return () => sortable.destroy()
-  }, [topLinks.length, setValue, topLinks])
-
-  useEffect(() => {
     if (!contentListRef.current) return
 
     const sortable = Sortable.create(contentListRef.current, {
@@ -364,10 +332,21 @@ export default function Editor({ data }: EditorProps) {
         const updated = [...contentSnapshot.current]
         const [movedItem] = updated.splice(oldIndex, 1)
         updated.splice(newIndex, 0, movedItem)
-        const reordered = updated.map((item, index) => ({
-          ...item,
-          order: index,
-        }))
+        const reordered = updated.map((item, index) => {
+          if (item.type === "link") {
+            return {
+              ...item,
+              order: index,
+              data: { ...item.data, order: index },
+            }
+          } else {
+            return {
+              ...item,
+              order: index,
+              data: { ...item.data, order: index },
+            }
+          }
+        })
         setValue("contentItems", reordered)
       },
     })
@@ -397,10 +376,14 @@ export default function Editor({ data }: EditorProps) {
           const updatedLinks = [...snapshot]
           const [movedItem] = updatedLinks.splice(oldIndex, 1)
           updatedLinks.splice(newIndex, 0, movedItem)
+          const reorderedLinks = updatedLinks.map((link, idx) => ({
+            ...link,
+            order: idx,
+          }))
 
           const updatedItems = contentItems.map((it, idx) => {
             if (idx === itemIndex && it.type === "group") {
-              return { ...it, data: { ...it.data, links: updatedLinks } }
+              return { ...it, data: { ...it.data, links: reorderedLinks } }
             }
             return it
           })
@@ -434,14 +417,10 @@ export default function Editor({ data }: EditorProps) {
         }
       })
 
-      const response = await fetch("/api/links/save", {
+      const response = await fetch("/api/links/normal/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          topLinks: formData.topLinks.map((link, index) => ({
-            ...link,
-            order: index,
-          })),
           normalLinks,
           linkGroups,
         }),
@@ -451,11 +430,15 @@ export default function Editor({ data }: EditorProps) {
 
       const responseData = await response.json().then((res) => res.data)
 
+      setOriginalData({
+        normalLinks: responseData.normalLinks,
+        linkGroups: responseData.linkGroups,
+      })
+
       const newContentItems = buildContentItems(
         responseData.normalLinks,
         responseData.linkGroups
       )
-      setValue("topLinks", responseData.topLinks)
       setValue("contentItems", newContentItems)
       alert("Links saved successfully!")
     } catch (error) {
@@ -502,98 +485,12 @@ export default function Editor({ data }: EditorProps) {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <Section
-          title="Top Links"
-          count={topLinks.length}
-          isOpen={topLinksOpen}
-          onToggle={() => setTopLinksOpen(!topLinksOpen)}
-          action={
-            <FormButton type="button" onClick={addTopLink}>
-              <Icon name="Plus" size={16} />
-              Add
-            </FormButton>
-          }
-        >
-          {topLinks.length > 0 ? (
-            <ul ref={topListRef} className="space-y-2">
-              {topLinks.map((link, index) => (
-                <li
-                  key={link.id}
-                  className="group flex items-center gap-3 p-4 bg-neutral-800/50 border border-neutral-800 rounded-lg hover:border-neutral-700 transition-colors"
-                >
-                  <button
-                    type="button"
-                    className="drag-handle cursor-grab text-neutral-600 hover:text-neutral-400 transition-colors"
-                  >
-                    <Icon name="GripVertical" size={18} />
-                  </button>
-
-                  <div className="flex flex-col items-center">
-                    <button
-                      type="button"
-                      onClick={() => openIconModal("top", index)}
-                      className={`flex items-center justify-center w-10 h-10 bg-neutral-800 border rounded-lg hover:border-neutral-500 transition-colors ${
-                        errors.topLinks?.[index]?.icon
-                          ? "border-red-500"
-                          : "border-neutral-700"
-                      }`}
-                    >
-                      {link.icon ? (
-                        <Icon
-                          name={link.icon as keyof typeof Icons}
-                          size={18}
-                        />
-                      ) : (
-                        <Icon name="PlusCircleDotted" size={18} />
-                      )}
-                    </button>
-                    {errors.topLinks?.[index]?.icon && (
-                      <span className="text-red-500 text-xs mt-1">
-                        Required
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex-1 flex flex-col">
-                    <input
-                      type="text"
-                      placeholder="https://example.com"
-                      {...register(`topLinks.${index}.url`)}
-                      className={`w-full px-4 py-2.5 bg-transparent border-b text-white placeholder-neutral-600 focus:outline-none transition-colors ${
-                        errors.topLinks?.[index]?.url
-                          ? "border-red-500 focus:border-red-500"
-                          : "border-neutral-700 focus:border-white"
-                      }`}
-                    />
-                    {errors.topLinks?.[index]?.url && (
-                      <span className="text-red-500 text-xs mt-1">
-                        {errors.topLinks[index].url.message ||
-                          "Valid URL is required"}
-                      </span>
-                    )}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => removeTopLink(index)}
-                    className="p-2 text-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity hover:text-white"
-                  >
-                    <Icon name="X" size={18} />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <EmptyState message="No links yet" />
-          )}
-        </Section>
-
-        <Section
           title="Links & Groups"
           count={contentItems.length}
           isOpen={contentOpen}
           onToggle={() => setContentOpen(!contentOpen)}
           action={
-            <div className="flex gap-2">
+            <div className="flex gap-2 ">
               <FormButton type="button" onClick={addLink}>
                 <Icon name="Plus" size={16} />
                 Add Link
@@ -614,11 +511,11 @@ export default function Editor({ data }: EditorProps) {
                     <div
                       key={link.id}
                       data-item-id={link.id}
-                      className="content-item group flex items-center gap-3 p-4 bg-neutral-800/50 border border-neutral-800 rounded-lg hover:border-neutral-700 transition-colors"
+                      className="content-item group flex items-center gap-3 p-4 theme-link-card-nested hover:theme-border-hover transition-colors"
                     >
                       <button
                         type="button"
-                        className="content-drag-handle cursor-grab text-neutral-600 hover:text-neutral-400 transition-colors"
+                        className="content-drag-handle cursor-grab theme-text-muted hover:theme-text-secondary transition-colors"
                       >
                         <Icon name="GripVertical" size={18} />
                       </button>
@@ -626,7 +523,7 @@ export default function Editor({ data }: EditorProps) {
                       <button
                         type="button"
                         onClick={() => openIconModal("content", itemIndex)}
-                        className="flex items-center justify-center w-10 h-10 bg-neutral-800 border border-neutral-700 rounded-lg hover:border-neutral-500 transition-colors"
+                        className="theme-text-primary theme-icon-container theme-icon-container-md hover:theme-border-hover transition-colors"
                       >
                         {link.icon ? (
                           <Icon
@@ -645,7 +542,7 @@ export default function Editor({ data }: EditorProps) {
                           {...register(
                             `contentItems.${itemIndex}.data.title` as const
                           )}
-                          className="w-full px-4 py-2.5 bg-transparent border-b border-neutral-700 text-white placeholder-neutral-600 focus:outline-none focus:border-white transition-colors"
+                          className="theme-inline-input"
                         />
                       </div>
 
@@ -656,14 +553,14 @@ export default function Editor({ data }: EditorProps) {
                           {...register(
                             `contentItems.${itemIndex}.data.url` as const
                           )}
-                          className="w-full px-4 py-2.5 bg-transparent border-b border-neutral-700 text-white placeholder-neutral-600 focus:outline-none focus:border-white transition-colors"
+                          className="theme-inline-input"
                         />
                       </div>
 
                       <button
                         type="button"
                         onClick={() => removeContentItem(itemIndex)}
-                        className="p-2 text-neutral-600 opacity-0 group-hover:opacity-100 transition-opacity hover:text-white"
+                        className="p-2 theme-text-muted hover:theme-text-primary transition-colors"
                       >
                         <Icon name="X" size={18} />
                       </button>
@@ -675,12 +572,12 @@ export default function Editor({ data }: EditorProps) {
                     <div
                       key={group.id}
                       data-item-id={group.id}
-                      className="content-item bg-neutral-900/50 border border-neutral-800 rounded-lg overflow-hidden"
+                      className="content-item theme-card overflow-hidden"
                     >
-                      <div className="flex items-center gap-3 p-4 bg-neutral-800/30">
+                      <div className="flex items-center gap-3 p-4 theme-group-header">
                         <button
                           type="button"
-                          className="content-drag-handle cursor-grab text-neutral-600 hover:text-neutral-400 transition-colors"
+                          className="content-drag-handle cursor-grab theme-text-muted hover:theme-text-secondary transition-colors"
                         >
                           <Icon name="GripVertical" size={18} />
                         </button>
@@ -688,7 +585,7 @@ export default function Editor({ data }: EditorProps) {
                         <button
                           type="button"
                           onClick={() => openIconModal("content", itemIndex)}
-                          className="flex items-center justify-center w-10 h-10 bg-neutral-800 border border-neutral-700 rounded-lg hover:border-neutral-500 transition-colors"
+                          className="theme-text-primary theme-icon-container theme-icon-container-md hover:theme-border-hover transition-colors"
                         >
                           {group.icon ? (
                             <Icon
@@ -707,7 +604,7 @@ export default function Editor({ data }: EditorProps) {
                             {...register(
                               `contentItems.${itemIndex}.data.name` as const
                             )}
-                            className="w-full px-4 py-2.5 bg-transparent border-b border-neutral-700 text-white placeholder-neutral-600 focus:outline-none focus:border-white transition-colors"
+                            className="theme-inline-input"
                           />
                         </div>
 
@@ -718,7 +615,7 @@ export default function Editor({ data }: EditorProps) {
                           transition={{ duration: 0.2 }}
                           type="button"
                           onClick={() => toggleGroupExpanded(group.id)}
-                          className="p-2 text-neutral-600 hover:text-neutral-400 transition-colors"
+                          className="p-2 theme-text-muted hover:theme-text-secondary transition-colors"
                         >
                           <Icon name="ChevronDown" size={18} />
                         </motion.button>
@@ -726,7 +623,7 @@ export default function Editor({ data }: EditorProps) {
                         <button
                           type="button"
                           onClick={() => openConfirmModal(itemIndex)}
-                          className="p-2 text-neutral-600 hover:text-red-500 transition-colors"
+                          className="p-2 theme-text-muted hover:text-red-500 transition-colors"
                         >
                           <Icon name="Trash" size={18} />
                         </button>
@@ -743,7 +640,7 @@ export default function Editor({ data }: EditorProps) {
                           >
                             <div className="p-4 pt-2 space-y-2">
                               <div className="flex justify-between items-center mb-2">
-                                <span className="text-sm text-neutral-500">
+                                <span className="text-sm theme-text-muted">
                                   {group.links?.length || 0} link
                                   {(group.links?.length || 0) !== 1 ? "s" : ""}
                                 </span>
@@ -767,11 +664,11 @@ export default function Editor({ data }: EditorProps) {
                                   {group.links.map((link, linkIndex) => (
                                     <li
                                       key={link.id}
-                                      className="group/link flex items-center gap-3 p-3 bg-neutral-800/50 border border-neutral-800 rounded-lg hover:border-neutral-700 transition-colors"
+                                      className="flex items-center gap-3 p-3 theme-link-card-nested"
                                     >
                                       <button
                                         type="button"
-                                        className="drag-handle cursor-grab text-neutral-600 hover:text-neutral-400 transition-colors"
+                                        className="drag-handle cursor-grab theme-text-muted hover:theme-text-secondary transition-colors"
                                       >
                                         <Icon name="GripVertical" size={16} />
                                       </button>
@@ -785,7 +682,7 @@ export default function Editor({ data }: EditorProps) {
                                             linkIndex
                                           )
                                         }
-                                        className="flex items-center justify-center w-8 h-8 bg-neutral-800 border border-neutral-700 rounded-lg hover:border-neutral-500 transition-colors"
+                                        className="theme-icon-container theme-icon-container-sm hover:theme-border-hover transition-colors"
                                       >
                                         {link.icon ? (
                                           <Icon
@@ -809,7 +706,7 @@ export default function Editor({ data }: EditorProps) {
                                           {...register(
                                             `contentItems.${itemIndex}.data.links.${linkIndex}.title` as const
                                           )}
-                                          className="w-full px-3 py-2 bg-transparent border-b border-neutral-700 text-white text-sm placeholder-neutral-600 focus:outline-none focus:border-white transition-colors"
+                                          className="theme-inline-input text-sm"
                                         />
                                       </div>
 
@@ -820,7 +717,7 @@ export default function Editor({ data }: EditorProps) {
                                           {...register(
                                             `contentItems.${itemIndex}.data.links.${linkIndex}.url` as const
                                           )}
-                                          className="w-full px-3 py-2 bg-transparent border-b border-neutral-700 text-white text-sm placeholder-neutral-600 focus:outline-none focus:border-white transition-colors"
+                                          className="theme-inline-input text-sm"
                                         />
                                       </div>
 
@@ -832,7 +729,7 @@ export default function Editor({ data }: EditorProps) {
                                             linkIndex
                                           )
                                         }
-                                        className="p-1.5 text-neutral-600 opacity-0 group-hover/link:opacity-100 transition-opacity hover:text-white"
+                                        className="p-1.5 theme-text-muted opacity-0 group-hover/link:opacity-100 transition-opacity hover:theme-text-primary"
                                       >
                                         <Icon name="X" size={16} />
                                       </button>
@@ -840,8 +737,8 @@ export default function Editor({ data }: EditorProps) {
                                   ))}
                                 </ul>
                               ) : (
-                                <div className="min-h-[60px] flex items-center justify-center border border-dashed border-neutral-700 rounded-lg">
-                                  <span className="text-neutral-600 text-sm">
+                                <div className="theme-empty-state min-h-[60px] flex items-center justify-center">
+                                  <span className="theme-text-muted text-sm">
                                     No links in this group
                                   </span>
                                 </div>

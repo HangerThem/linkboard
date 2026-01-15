@@ -17,7 +17,7 @@ export default function Source() {
         rel="noopener noreferrer"
       >
         <motion.div
-          className="flex items-center gap-2 px-4 py-2 text-neutral-600 hover:text-neutral-400 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 theme-text-muted hover:theme-text-secondary transition-colors"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

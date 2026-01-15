@@ -45,7 +45,7 @@ export default function IconSearch({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 theme-overlay"
             onClick={handleClose}
           />
 
@@ -55,22 +55,22 @@ export default function IconSearch({
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
-              className="w-full max-w-2xl bg-neutral-900 border border-neutral-800 rounded-xl flex flex-col max-h-[80vh]"
+              className="w-full max-w-2xl theme-modal flex flex-col max-h-[80vh] p-0"
             >
-              <div className="p-6 border-b border-neutral-800">
-                <h2 className="text-sm font-medium uppercase tracking-widest text-neutral-400 mb-4">
+              <div className="p-6 theme-border border-b">
+                <h2 className="text-sm font-medium uppercase tracking-widest theme-text-muted mb-4">
                   Select Icon
                 </h2>
                 <div className="relative">
                   <Icons.Search
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 theme-text-muted"
                     size={18}
                   />
                   <input
                     ref={inputRef}
                     type="text"
                     placeholder="Search icons..."
-                    className="w-full pl-11 pr-4 py-3 bg-neutral-800 border border-neutral-700 rounded-lg text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 transition-colors"
+                    className="theme-input pl-11"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
@@ -92,24 +92,21 @@ export default function IconSearch({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         type="button"
-                        className="flex flex-col items-center justify-center p-3 rounded-lg border border-neutral-800 group"
+                        className="flex flex-col items-center justify-center p-3 theme-link-card-nested group"
                         onClick={() => {
                           handleSelect(name)
                           handleClose()
                         }}
-                        whileHover={{
-                          borderColor: "#525252",
-                          backgroundColor: "rgba(38, 38, 38, 1)",
-                        }}
+                        whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.1 }}
                         title={name}
                       >
                         <IconComponent
                           size={24}
-                          className="text-neutral-400 group-hover:text-white transition-colors"
+                          className="theme-text-muted group-hover:theme-text-primary transition-colors"
                         />
-                        <span className="text-[10px] mt-2 text-neutral-600 group-hover:text-neutral-400 truncate w-full text-center transition-colors">
+                        <span className="text-[10px] mt-2 theme-text-muted group-hover:theme-text-secondary truncate w-full text-center transition-colors">
                           {name}
                         </span>
                       </motion.button>
@@ -120,27 +117,24 @@ export default function IconSearch({
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-center py-12 border border-dashed border-neutral-800 rounded-lg"
+                    className="theme-empty-state"
                   >
-                    <p className="text-neutral-600 text-sm">
+                    <p className="theme-text-muted text-sm">
                       No icons found matching "{search}"
                     </p>
                   </motion.div>
                 )}
               </div>
 
-              <div className="p-4 border-t border-neutral-800 flex justify-between items-center">
-                <span className="text-xs text-neutral-600">
+              <div className="p-4 theme-border border-t flex justify-between items-center">
+                <span className="text-xs theme-text-muted">
                   {iconNames.length} icons
                 </span>
                 <motion.button
                   type="button"
-                  className="px-5 py-2 bg-neutral-800 border border-neutral-700 text-neutral-300 rounded-full text-sm font-medium"
+                  className="theme-btn-secondary"
                   onClick={handleClose}
-                  whileHover={{
-                    borderColor: "#525252",
-                    color: "#ffffff",
-                  }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.1 }}
                 >
