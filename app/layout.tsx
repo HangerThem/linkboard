@@ -18,14 +18,6 @@ export const metadata: Metadata = {
   publisher: "HangerThem",
 }
 
-// Map enum values to data-theme attribute values
-const themeDataMap: Record<Theme, string> = {
-  [Theme.default]: "default",
-  [Theme.dark]: "dark",
-  [Theme.light]: "light",
-  [Theme.neo_brutalism]: "neo-brutalism",
-}
-
 export default async function RootLayout({
   children,
 }: {
@@ -35,8 +27,7 @@ export default async function RootLayout({
     where: { id: "default" },
   })
 
-  const themeEnum = (settings?.theme as Theme) || Theme.default
-  const theme = themeDataMap[themeEnum] || "default"
+  const theme = (settings?.theme as Theme).replace(/_/g, "-") || Theme.default
 
   return (
     <html lang="en" data-theme={theme}>

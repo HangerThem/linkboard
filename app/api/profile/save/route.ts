@@ -2,7 +2,16 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/lib/prisma"
 import { writeFile, mkdir } from "fs/promises"
 import path from "path"
-import { ProfileCreateSchema, ProfileSchema } from "@/types/Profile"
+import { ProfileCreateSchema } from "@/types/Profile"
+
+const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads")
+const MAX_AVATAR_SIZE = 2 * 1024 * 1024
+const ALLOWED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+]
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,17 +38,29 @@ export async function POST(request: NextRequest) {
 
     let avatarPath: string | null = null
     if (avatar && avatar.size > 0) {
+      if (avatar.size > MAX_AVATAR_SIZE) {
+        return NextResponse.json(
+          { error: "Avatar file size exceeds the maximum limit" },
+          { status: 400 }
+        )
+      }
+
+      if (!ALLOWED_IMAGE_TYPES.includes(avatar.type)) {
+        return NextResponse.json(
+          { error: "Unsupported avatar file type" },
+          { status: 400 }
+        )
+      }
       const bytes = await avatar.arrayBuffer()
       const buffer = Buffer.from(bytes)
 
-      const uploadsDir = path.join(process.cwd(), "public", "uploads")
-      await mkdir(uploadsDir, { recursive: true })
+      await mkdir(UPLOAD_DIR, { recursive: true })
 
       const ext = avatar.name.split(".").pop()
       const filename = `avatar-${Date.now()}.${ext}`
       avatarPath = `/uploads/${filename}`
 
-      await writeFile(path.join(uploadsDir, filename), buffer)
+      await writeFile(path.join(UPLOAD_DIR, filename), buffer)
     }
 
     const profile = await prisma.profile.update({
