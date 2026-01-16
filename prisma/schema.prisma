@@ -8,9 +8,9 @@ datasource db {
 }
 
 enum Density {
-  COMPACT
-  COMFORTABLE
-  SPACIOUS
+  compact
+  comfortable
+  spacious
 }
 
 enum Theme {
@@ -60,7 +60,7 @@ model Setting {
   id        String   @id @default(cuid())
   source    Boolean  @default(true)
   shareBar  Boolean  @default(true)
-  density   Density  @default(COMFORTABLE)
+  density   Density  @default(comfortable)
   theme     Theme    @default(default)
   createdAt DateTime @default(now())
 }

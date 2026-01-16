@@ -18,11 +18,12 @@ async function main() {
       id: "default",
       shareBar: true,
       source: false,
-      density: Density.COMFORTABLE,
+      density: Density.comfortable,
       theme: Theme.default,
     },
   })
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect()
