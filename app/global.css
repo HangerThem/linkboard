@@ -2,6 +2,15 @@
 @import url("../themes/dark.css");
 @import url("../themes/light.css");
 @import url("../themes/neo-brutalism.css");
+@import url("../themes/ocean.css");
+@import url("../themes/forest.css");
+@import url("../themes/sunset.css");
+@import url("../themes/lavender.css");
+@import url("../themes/nord.css");
+@import url("../themes/glassmorphism.css");
+@import url("../themes/retro.css");
+@import url("../themes/cyberpunk.css");
+@import url("../themes/paper.css");
 
 @import "tailwindcss";
 
@@ -78,6 +87,7 @@
 
   /* Link card component */
   .theme-link-card {
+    font-family: var(--font-family);
     background-color: rgb(var(--card));
     border: var(--border-width) solid rgb(var(--card-border));
     border-radius: var(--radius-lg);
@@ -441,7 +451,7 @@
     position: relative;
     display: inline-flex;
     height: 2.5rem;
-    width: 18rem;
+    width: 20rem;
     background-color: rgb(var(--card));
     border: var(--border-width) solid rgb(var(--border));
     border-radius: var(--radius-full);
@@ -451,7 +461,7 @@
     flex: 1;
     position: relative;
     z-index: 10;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-family: var(--font-family);
     color: rgb(var(--text-muted));
     border-radius: var(--radius-full);

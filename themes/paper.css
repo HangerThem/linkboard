@@ -1,0 +1,110 @@
+/* Paper theme - Handwritten notebook aesthetic */
+[data-theme="paper"] {
+  --background: 255 251 235;
+  --foreground: 41 37 36;
+
+  --card: 255 255 255;
+  --card-border: 214 211 209;
+  --card-hover: 254 252 232;
+
+  --text-primary: 41 37 36;
+  --text-secondary: 68 64 60;
+  --text-muted: 168 162 158;
+
+  --accent: 37 99 235;
+  --accent-foreground: 255 255 255;
+  --accent-hover: 29 78 216;
+
+  --button-primary: 41 37 36;
+  --button-primary-text: 255 255 255;
+  --button-secondary: 255 255 255;
+  --button-secondary-text: 41 37 36;
+  --button-secondary-border: 168 162 158;
+
+  --danger: 185 28 28;
+  --danger-hover: 153 27 27;
+  --success: 22 101 52;
+
+  --border: 214 211 209;
+  --border-hover: 168 162 158;
+  --border-dashed: 168 162 158;
+
+  --overlay: 41 37 36 / 0.4;
+
+  --icon-bg: 254 249 195;
+  --icon-border: 214 211 209;
+
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --shadow: 2px 3px 0 rgb(214 211 209);
+  --shadow-lg: 4px 6px 0 rgb(214 211 209);
+  --font-family: var(--font-caveat), "Patrick Hand", cursive;
+}
+
+/* Paper texture effect via subtle patterns */
+[data-theme="paper"] body {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 31px,
+    rgb(219 234 254 / 0.3) 31px,
+    rgb(219 234 254 / 0.3) 32px
+  );
+  background-size: 100% 32px;
+}
+
+/* Paper cards with slight rotation for organic feel */
+[data-theme="paper"] .theme-card,
+[data-theme="paper"] .theme-link-card {
+  box-shadow: 2px 3px 0 rgb(168 162 158 / 0.5);
+  border-style: solid;
+  position: relative;
+}
+
+[data-theme="paper"] .theme-link-card:nth-child(odd) {
+  transform: rotate(-0.3deg);
+}
+
+[data-theme="paper"] .theme-link-card:nth-child(even) {
+  transform: rotate(0.3deg);
+}
+
+[data-theme="paper"] .theme-link-card:hover {
+  transform: rotate(0deg) translateY(-2px);
+}
+
+/* Paper section with notebook margin */
+[data-theme="paper"] .theme-section {
+  border-left: 3px solid rgb(239 68 68 / 0.3);
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+/* Handwritten style buttons */
+[data-theme="paper"] .theme-btn-primary,
+[data-theme="paper"] .theme-btn-secondary {
+  border-style: solid;
+  font-size: 1rem;
+}
+
+/* Paper input - underline only like writing lines */
+[data-theme="paper"] .theme-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(168 162 158);
+  border-radius: 0;
+}
+
+[data-theme="paper"] .theme-input:focus {
+  border-bottom: 2px solid rgb(37 99 235);
+  box-shadow: none;
+}
+
+/* Sharebar - keep pill shape floating elements */
+[data-theme="paper"] .theme-share-btn,
+[data-theme="paper"] .theme-share-options {
+  border-radius: 9999px;
+  box-shadow: 2px 3px 0 rgb(168 162 158 / 0.6);
+}

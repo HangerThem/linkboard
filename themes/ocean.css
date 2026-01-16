@@ -1,0 +1,39 @@
+/* Ocean theme - Calm blue tones */
+[data-theme="ocean"] {
+  --background: 15 23 42;
+  --foreground: 241 245 249;
+
+  --card: 30 41 59;
+  --card-border: 51 65 85;
+  --card-hover: 51 65 85;
+
+  --text-primary: 241 245 249;
+  --text-secondary: 203 213 225;
+  --text-muted: 100 116 139;
+
+  --accent: 56 189 248;
+  --accent-foreground: 15 23 42;
+  --accent-hover: 14 165 233;
+
+  --button-primary: 56 189 248;
+  --button-primary-text: 15 23 42;
+  --button-secondary: 51 65 85;
+  --button-secondary-text: 241 245 249;
+  --button-secondary-border: 71 85 105;
+
+  --danger: 244 63 94;
+  --danger-hover: 225 29 72;
+  --success: 52 211 153;
+
+  --border: 51 65 85;
+  --border-hover: 71 85 105;
+  --border-dashed: 71 85 105;
+
+  --overlay: 15 23 42 / 0.85;
+
+  --icon-bg: 51 65 85;
+  --icon-border: 71 85 105;
+
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}

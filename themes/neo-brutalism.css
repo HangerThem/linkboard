@@ -36,9 +36,26 @@
 
   --radius: 0;
   --radius-lg: 0;
-  --radius-full: 0;
+  --radius-full: 9999px;
   --border-width: 3px;
   --shadow: 4px 4px 0 0 rgb(0 0 0);
-  --shadow-lg: 8px 8px 0 0 rgb(0 0 0);
-  --font-family: "Space Mono", "Courier New", monospace;
+  --shadow-lg: 6px 6px 0 0 rgb(0 0 0);
+  --font-family: var(--font-space-mono), "Space Mono", "Courier New", monospace;
+}
+
+/* Neo-brutalism sharebar - keep rounded for floating UI */
+[data-theme="neo-brutalism"] .theme-share-btn,
+[data-theme="neo-brutalism"] .theme-share-options,
+[data-theme="neo-brutalism"] .theme-share-option-btn {
+  border-radius: 9999px;
+}
+
+[data-theme="neo-brutalism"] .theme-share-btn,
+[data-theme="neo-brutalism"] .theme-share-options {
+  box-shadow: 3px 3px 0 0 rgb(0 0 0);
+}
+
+[data-theme="neo-brutalism"] .theme-share-btn:hover,
+[data-theme="neo-brutalism"] .theme-share-options:hover {
+  box-shadow: 4px 4px 0 0 rgb(0 0 0);
 }

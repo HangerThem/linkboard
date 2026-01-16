@@ -1,0 +1,39 @@
+/* Forest theme - Nature-inspired greens */
+[data-theme="forest"] {
+  --background: 20 26 22;
+  --foreground: 236 253 245;
+
+  --card: 30 39 33;
+  --card-border: 45 58 49;
+  --card-hover: 45 58 49;
+
+  --text-primary: 236 253 245;
+  --text-secondary: 187 247 208;
+  --text-muted: 110 142 120;
+
+  --accent: 74 222 128;
+  --accent-foreground: 20 26 22;
+  --accent-hover: 34 197 94;
+
+  --button-primary: 74 222 128;
+  --button-primary-text: 20 26 22;
+  --button-secondary: 45 58 49;
+  --button-secondary-text: 236 253 245;
+  --button-secondary-border: 65 80 70;
+
+  --danger: 248 113 113;
+  --danger-hover: 239 68 68;
+  --success: 134 239 172;
+
+  --border: 45 58 49;
+  --border-hover: 65 80 70;
+  --border-dashed: 65 80 70;
+
+  --overlay: 20 26 22 / 0.85;
+
+  --icon-bg: 45 58 49;
+  --icon-border: 65 80 70;
+
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}

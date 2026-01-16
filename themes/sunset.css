@@ -1,0 +1,39 @@
+/* Sunset theme - Warm coral and orange tones */
+[data-theme="sunset"] {
+  --background: 28 17 20;
+  --foreground: 255 241 242;
+
+  --card: 45 28 32;
+  --card-border: 68 42 48;
+  --card-hover: 68 42 48;
+
+  --text-primary: 255 241 242;
+  --text-secondary: 253 205 210;
+  --text-muted: 156 112 118;
+
+  --accent: 251 146 60;
+  --accent-foreground: 28 17 20;
+  --accent-hover: 249 115 22;
+
+  --button-primary: 251 146 60;
+  --button-primary-text: 28 17 20;
+  --button-secondary: 68 42 48;
+  --button-secondary-text: 255 241 242;
+  --button-secondary-border: 95 60 68;
+
+  --danger: 239 68 68;
+  --danger-hover: 220 38 38;
+  --success: 74 222 128;
+
+  --border: 68 42 48;
+  --border-hover: 95 60 68;
+  --border-dashed: 95 60 68;
+
+  --overlay: 28 17 20 / 0.85;
+
+  --icon-bg: 68 42 48;
+  --icon-border: 95 60 68;
+
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+}

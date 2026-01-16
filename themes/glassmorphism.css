@@ -1,0 +1,67 @@
+/* Glassmorphism theme - Frosted glass aesthetic */
+[data-theme="glassmorphism"] {
+  --background: 99 102 241;
+  --foreground: 255 255 255;
+
+  --card: 255 255 255 / 0.15;
+  --card-border: 255 255 255 / 0.25;
+  --card-hover: 255 255 255 / 0.25;
+
+  --text-primary: 255 255 255;
+  --text-secondary: 238 242 255;
+  --text-muted: 199 210 254;
+
+  --accent: 255 255 255;
+  --accent-foreground: 79 70 229;
+  --accent-hover: 238 242 255;
+
+  --button-primary: 255 255 255 / 0.9;
+  --button-primary-text: 79 70 229;
+  --button-secondary: 255 255 255 / 0.1;
+  --button-secondary-text: 255 255 255;
+  --button-secondary-border: 255 255 255 / 0.3;
+
+  --danger: 251 113 133;
+  --danger-hover: 244 63 94;
+  --success: 134 239 172;
+
+  --border: 255 255 255 / 0.2;
+  --border-hover: 255 255 255 / 0.4;
+  --border-dashed: 255 255 255 / 0.3;
+
+  --overlay: 79 70 229 / 0.6;
+
+  --icon-bg: 255 255 255 / 0.15;
+  --icon-border: 255 255 255 / 0.25;
+
+  --radius: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --shadow: 0 8px 32px 0 rgb(31 38 135 / 0.2);
+  --shadow-lg: 0 25px 50px -12px rgb(31 38 135 / 0.4);
+  --font-family: var(--font-inter), "Inter", "SF Pro Display", -apple-system,
+    sans-serif;
+}
+
+/* Glassmorphism-specific overrides for backdrop blur */
+[data-theme="glassmorphism"] .theme-card,
+[data-theme="glassmorphism"] .theme-link-card,
+[data-theme="glassmorphism"] .theme-section,
+[data-theme="glassmorphism"] .theme-modal {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+[data-theme="glassmorphism"] .theme-input {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Glassmorphism sharebar - frosted glass effect */
+[data-theme="glassmorphism"] .theme-share-btn,
+[data-theme="glassmorphism"] .theme-share-options {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 0.15);
+}

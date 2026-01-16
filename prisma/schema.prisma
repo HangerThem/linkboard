@@ -18,6 +18,15 @@ enum Theme {
   dark
   light
   neo_brutalism
+  cyberpunk
+  forest
+  sunset
+  lavender
+  ocean
+  nord
+  retro
+  glassmorphism
+  paper
 }
 
 model Profile {

@@ -1,0 +1,110 @@
+/* Retro theme - 90s web aesthetic with pixelated feel */
+[data-theme="retro"] {
+  --background: 0 128 128;
+  --foreground: 255 255 255;
+
+  --card: 192 192 192;
+  --card-border: 255 255 255;
+  --card-hover: 212 212 212;
+
+  --text-primary: 0 0 0;
+  --text-secondary: 0 0 128;
+  --text-muted: 128 128 128;
+
+  --accent: 0 0 128;
+  --accent-foreground: 255 255 255;
+  --accent-hover: 0 0 168;
+
+  --button-primary: 192 192 192;
+  --button-primary-text: 0 0 0;
+  --button-secondary: 192 192 192;
+  --button-secondary-text: 0 0 0;
+  --button-secondary-border: 255 255 255;
+
+  --danger: 255 0 0;
+  --danger-hover: 200 0 0;
+  --success: 0 128 0;
+
+  --border: 128 128 128;
+  --border-hover: 64 64 64;
+  --border-dashed: 0 0 0;
+
+  --overlay: 0 0 0 / 0.7;
+
+  --icon-bg: 255 255 0;
+  --icon-border: 0 0 0;
+
+  --radius: 0;
+  --radius-lg: 0;
+  --radius-full: 9999px;
+  --border-width: 2px;
+  --shadow: inset -2px -2px 0 0 rgb(128 128 128),
+    inset 2px 2px 0 0 rgb(255 255 255);
+  --shadow-lg: inset -2px -2px 0 0 rgb(128 128 128),
+    inset 2px 2px 0 0 rgb(255 255 255);
+  --font-family: var(--font-vt323), "VT323", "Courier New", monospace;
+}
+
+/* Retro-specific 3D button effect (Windows 95 style) */
+[data-theme="retro"] .theme-btn-primary,
+[data-theme="retro"] .theme-btn-secondary {
+  border-top: 2px solid rgb(255 255 255);
+  border-left: 2px solid rgb(255 255 255);
+  border-right: 2px solid rgb(64 64 64);
+  border-bottom: 2px solid rgb(64 64 64);
+  box-shadow: none;
+}
+
+[data-theme="retro"] .theme-btn-primary:active,
+[data-theme="retro"] .theme-btn-secondary:active {
+  border-top: 2px solid rgb(64 64 64);
+  border-left: 2px solid rgb(64 64 64);
+  border-right: 2px solid rgb(255 255 255);
+  border-bottom: 2px solid rgb(255 255 255);
+  transform: none;
+}
+
+/* Retro card beveled edges */
+[data-theme="retro"] .theme-card,
+[data-theme="retro"] .theme-link-card,
+[data-theme="retro"] .theme-section {
+  border-top: 2px solid rgb(255 255 255);
+  border-left: 2px solid rgb(255 255 255);
+  border-right: 2px solid rgb(64 64 64);
+  border-bottom: 2px solid rgb(64 64 64);
+}
+
+/* Retro input sunken style */
+[data-theme="retro"] .theme-input {
+  border-top: 2px solid rgb(64 64 64);
+  border-left: 2px solid rgb(64 64 64);
+  border-right: 2px solid rgb(255 255 255);
+  border-bottom: 2px solid rgb(255 255 255);
+  background-color: rgb(255 255 255);
+}
+
+/* Title bar style for modals */
+[data-theme="retro"] .theme-modal {
+  border-top: 2px solid rgb(255 255 255);
+  border-left: 2px solid rgb(255 255 255);
+  border-right: 2px solid rgb(64 64 64);
+  border-bottom: 2px solid rgb(64 64 64);
+}
+
+/* Retro sharebar - keep rounded for floating UI */
+[data-theme="retro"] .theme-share-btn,
+[data-theme="retro"] .theme-share-options,
+[data-theme="retro"] .theme-share-option-btn {
+  border-radius: 9999px;
+}
+
+[data-theme="retro"] .theme-share-btn,
+[data-theme="retro"] .theme-share-options {
+  background-color: rgb(192 192 192);
+  border: 2px solid rgb(192 192 192);
+  border-top-color: rgb(255 255 255);
+  border-left-color: rgb(255 255 255);
+  border-right-color: rgb(64 64 64);
+  border-bottom-color: rgb(64 64 64);
+  box-shadow: none;
+}

@@ -40,5 +40,5 @@
   --border-width: 1px;
   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
   --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-  --font-family: "K2D", sans-serif;
+  --font-family: var(--font-k2d), "K2D", sans-serif;
 }

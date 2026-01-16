@@ -1,0 +1,39 @@
+/* Nord theme - Arctic color palette */
+[data-theme="nord"] {
+  --background: 46 52 64;
+  --foreground: 236 239 244;
+
+  --card: 59 66 82;
+  --card-border: 67 76 94;
+  --card-hover: 67 76 94;
+
+  --text-primary: 236 239 244;
+  --text-secondary: 229 233 240;
+  --text-muted: 136 146 166;
+
+  --accent: 136 192 208;
+  --accent-foreground: 46 52 64;
+  --accent-hover: 129 161 193;
+
+  --button-primary: 136 192 208;
+  --button-primary-text: 46 52 64;
+  --button-secondary: 67 76 94;
+  --button-secondary-text: 236 239 244;
+  --button-secondary-border: 76 86 106;
+
+  --danger: 191 97 106;
+  --danger-hover: 180 82 92;
+  --success: 163 190 140;
+
+  --border: 67 76 94;
+  --border-hover: 76 86 106;
+  --border-dashed: 76 86 106;
+
+  --overlay: 46 52 64 / 0.85;
+
+  --icon-bg: 67 76 94;
+  --icon-border: 76 86 106;
+
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2);
+  --shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+}

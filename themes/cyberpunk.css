@@ -1,0 +1,86 @@
+/* Cyberpunk theme - Neon-lit dystopian aesthetic */
+[data-theme="cyberpunk"] {
+  --background: 13 2 33;
+  --foreground: 236 72 153;
+
+  --card: 26 4 66;
+  --card-border: 139 92 246;
+  --card-hover: 46 16 101;
+
+  --text-primary: 249 168 212;
+  --text-secondary: 196 181 253;
+  --text-muted: 139 92 246;
+
+  --accent: 6 182 212;
+  --accent-foreground: 13 2 33;
+  --accent-hover: 34 211 238;
+
+  --button-primary: 6 182 212;
+  --button-primary-text: 13 2 33;
+  --button-secondary: 46 16 101;
+  --button-secondary-text: 249 168 212;
+  --button-secondary-border: 139 92 246;
+
+  --danger: 244 63 94;
+  --danger-hover: 251 113 133;
+  --success: 52 211 153;
+
+  --border: 139 92 246;
+  --border-hover: 192 132 252;
+  --border-dashed: 139 92 246;
+
+  --overlay: 13 2 33 / 0.9;
+
+  --icon-bg: 46 16 101;
+  --icon-border: 139 92 246;
+
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-full: 9999px;
+  --border-width: 1px;
+  --shadow: 0 0 20px rgb(139 92 246 / 0.5), 0 0 40px rgb(6 182 212 / 0.2);
+  --shadow-lg: 0 0 30px rgb(139 92 246 / 0.6), 0 0 60px rgb(6 182 212 / 0.3);
+  --font-family: var(--font-orbitron), "Rajdhani", sans-serif;
+}
+
+/* Cyberpunk glow effects */
+[data-theme="cyberpunk"] .theme-card,
+[data-theme="cyberpunk"] .theme-link-card,
+[data-theme="cyberpunk"] .theme-section {
+  box-shadow: 0 0 15px rgb(139 92 246 / 0.3),
+    inset 0 0 20px rgb(139 92 246 / 0.05);
+}
+
+[data-theme="cyberpunk"] .theme-card:hover,
+[data-theme="cyberpunk"] .theme-link-card:hover {
+  box-shadow: 0 0 25px rgb(6 182 212 / 0.5), 0 0 50px rgb(139 92 246 / 0.3);
+  border-color: rgb(6 182 212);
+}
+
+[data-theme="cyberpunk"] .theme-btn-primary {
+  box-shadow: 0 0 15px rgb(6 182 212 / 0.6);
+  text-shadow: 0 0 10px rgb(6 182 212 / 0.8);
+}
+
+[data-theme="cyberpunk"] .theme-btn-primary:hover {
+  box-shadow: 0 0 25px rgb(6 182 212 / 0.8), 0 0 50px rgb(6 182 212 / 0.4);
+}
+
+/* Cyberpunk input glow */
+[data-theme="cyberpunk"] .theme-input:focus {
+  box-shadow: 0 0 15px rgb(6 182 212 / 0.4),
+    inset 0 0 10px rgb(139 92 246 / 0.1);
+  border-color: rgb(6 182 212);
+}
+
+/* Sharebar specific - keep rounded for floating elements */
+[data-theme="cyberpunk"] .theme-share-btn,
+[data-theme="cyberpunk"] .theme-share-options {
+  border-radius: 9999px;
+  box-shadow: 0 0 20px rgb(139 92 246 / 0.4), 0 0 40px rgb(6 182 212 / 0.2);
+}
+
+[data-theme="cyberpunk"] .theme-share-btn:hover,
+[data-theme="cyberpunk"] .theme-share-options:hover {
+  box-shadow: 0 0 30px rgb(6 182 212 / 0.6), 0 0 60px rgb(139 92 246 / 0.3);
+}
