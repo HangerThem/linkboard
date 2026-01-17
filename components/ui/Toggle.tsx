@@ -27,7 +27,7 @@ export default function Toggle({
         className="theme-toggle-thumb"
         data-checked={checked}
         animate={{
-          x: checked ? 20 : 2,
+          x: checked ? 24 : 4,
         }}
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
       />

@@ -72,7 +72,6 @@ export default function SettingsForm({ data }: SettingsFormProps) {
       alert("Settings saved successfully!")
       setOriginalData(formData.settings)
       setValue("settings", formData.settings)
-      // Reload to apply theme changes
       window.location.reload()
     } catch (error) {
       console.error(error)
@@ -84,7 +83,7 @@ export default function SettingsForm({ data }: SettingsFormProps) {
     <div className="max-w-2xl mx-auto space-y-6">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <Section
-          title="General"
+          title="General Settings"
           isOpen={generalOpen}
           onToggle={() => setGeneralOpen(!generalOpen)}
         >
@@ -192,51 +191,6 @@ export default function SettingsForm({ data }: SettingsFormProps) {
             {errors.settings?.density && (
               <span className="text-red-500 text-xs">
                 {errors.settings.density.message}
-              </span>
-            )}
-          </div>
-
-          <div className="space-y-4 mt-4">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.15 }}
-              className="flex items-center justify-between p-4 theme-link-card-nested"
-            >
-              <div className="flex items-center gap-3">
-                <div className="theme-icon-container theme-icon-container-md theme-text-primary">
-                  <Icon name="Palette" size={18} />
-                </div>
-                <div className="flex flex-col">
-                  <span className="theme-text-primary text-sm font-medium">
-                    Theme
-                  </span>
-                  <span className="theme-text-muted text-xs">
-                    Choose a visual theme for your link board
-                  </span>
-                </div>
-              </div>
-              <Controller
-                name="settings.theme"
-                control={control}
-                render={({ field }) => (
-                  <select
-                    value={field.value}
-                    onChange={field.onChange}
-                    className="theme-input py-2 px-3 w-40"
-                  >
-                    {Object.values(Theme).map((theme) => (
-                      <option key={theme} value={theme}>
-                        {themeLabels[theme]}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              />
-            </motion.div>
-            {errors.settings?.theme && (
-              <span className="text-red-500 text-xs">
-                {errors.settings.theme.message}
               </span>
             )}
           </div>

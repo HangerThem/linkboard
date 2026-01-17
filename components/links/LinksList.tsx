@@ -64,11 +64,11 @@ export default function LinksList({
 
   const getSpacingClass = () => {
     switch (density) {
-      case Density.COMPACT:
+      case Density.compact:
         return "space-y-2"
-      case Density.COMFORTABLE:
+      case Density.comfortable:
         return "space-y-3"
-      case Density.SPACIOUS:
+      case Density.spacious:
         return "space-y-4"
       default:
         return "space-y-3"
@@ -77,11 +77,11 @@ export default function LinksList({
 
   const getLinkSpacingClass = () => {
     switch (density) {
-      case Density.COMPACT:
+      case Density.compact:
         return "p-2"
-      case Density.COMFORTABLE:
+      case Density.comfortable:
         return "p-3"
-      case Density.SPACIOUS:
+      case Density.spacious:
         return "p-4"
       default:
         return "p-3"
@@ -121,7 +121,7 @@ export default function LinksList({
           transition={{ duration: 0.15 }}
         >
           {link.icon && (
-            <div className="theme-icon-container theme-icon-container-md">
+            <div className="theme-text-primary theme-icon-container theme-icon-container-md">
               <Icon name={link.icon as keyof typeof Icons} size={20} />
             </div>
           )}
@@ -159,7 +159,7 @@ export default function LinksList({
           whileTap={{ scale: 0.99 }}
         >
           {group.icon && (
-            <div className="theme-icon-container theme-icon-container-md">
+            <div className="theme-text-primary theme-icon-container theme-icon-container-md">
               <Icon name={group.icon as keyof typeof Icons} size={20} />
             </div>
           )}
@@ -171,7 +171,7 @@ export default function LinksList({
             {(group.links?.length || 0) !== 1 ? "s" : ""}
           </span>
           <motion.div
-            className="theme-text-muted"
+            className="theme-text-primary"
             animate={{ rotate: expandedGroups.has(group.id) ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
@@ -214,7 +214,7 @@ export default function LinksList({
                         transition={{ duration: 0.15 }}
                       >
                         {link.icon && (
-                          <div className="theme-icon-container theme-icon-container-sm">
+                          <div className="theme-text-primary theme-icon-container theme-icon-container-sm">
                             <Icon
                               name={link.icon as keyof typeof Icons}
                               size={16}

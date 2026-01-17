@@ -1,11 +1,11 @@
 import NormalLinks from "@/components/forms/NormalLinks"
-import Editor from "@/components/forms/NormalLinks"
 import ProfileForm from "@/components/forms/Profile"
 import SettingsForm from "@/components/forms/Settings"
 import TopLinks from "@/components/forms/TopLinks"
 import Icon from "@/components/icon"
 import prisma from "@/lib/prisma"
 import Link from "next/link"
+import Theme from "@/components/forms/Theme"
 
 export default async function EditorPage() {
   const normalLinks = await prisma.normalLink.findMany({
@@ -58,6 +58,8 @@ export default async function EditorPage() {
         <NormalLinks data={{ normalLinks, linkGroups }} />
 
         <SettingsForm data={settings} />
+
+        <Theme data={settings.theme} />
       </div>
     </main>
   )

@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma"
 import { Theme } from "@/prisma/generated/enums"
 
 export const metadata: Metadata = {
-  icons: ["/profile.png"],
+  title: "LinkBoard",
   description: "LinkBoard - A simple and customizable link board application.",
   authors: [
     {

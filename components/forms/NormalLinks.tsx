@@ -31,7 +31,7 @@ const FormDataSchema = z.object({
         order: z.number(),
         data: LinkGroupSchema,
       }),
-    ])
+    ]),
   ),
 })
 
@@ -54,7 +54,7 @@ interface EditorProps {
 
 function buildContentItems(
   normalLinks: NormalLink[],
-  linkGroups: LinkGroup[]
+  linkGroups: LinkGroup[],
 ): ContentItem[] {
   const items: ContentItem[] = []
 
@@ -90,12 +90,12 @@ export default function NormalLinks({ data }: EditorProps) {
   const groupLinksSnapshots = useRef<Map<string, NormalLink[]>>(new Map())
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false)
   const [groupToDeleteIndex, setGroupToDeleteIndex] = useState<number | null>(
-    null
+    null,
   )
 
   const initialContentItems = buildContentItems(
     originalData.normalLinks,
-    originalData.linkGroups || []
+    originalData.linkGroups || [],
   )
 
   const {
@@ -210,7 +210,7 @@ export default function NormalLinks({ data }: EditorProps) {
     }
     setValue(
       "contentItems",
-      contentItems.filter((_, i) => i !== index)
+      contentItems.filter((_, i) => i !== index),
     )
   }
 
@@ -234,7 +234,7 @@ export default function NormalLinks({ data }: EditorProps) {
   const shouldDisableSubmit = () => {
     const initialContent = buildContentItems(
       originalData.normalLinks,
-      originalData.linkGroups || []
+      originalData.linkGroups || [],
     )
 
     const normalizeForComparison = (items: ContentItem[]) =>
@@ -245,17 +245,17 @@ export default function NormalLinks({ data }: EditorProps) {
             ? {
                 ...(rest.data as LinkGroup),
                 links: (rest.data as LinkGroup).links?.map(
-                  ({ order: linkOrder, ...linkRest }) => linkRest
+                  ({ order: linkOrder, ...linkRest }) => linkRest,
                 ),
               }
             : { ...(rest.data as NormalLink), order: undefined },
       }))
 
     const initialNormalized = JSON.stringify(
-      normalizeForComparison(initialContent)
+      normalizeForComparison(initialContent),
     )
     const currentNormalized = JSON.stringify(
-      normalizeForComparison(contentItems)
+      normalizeForComparison(contentItems),
     )
 
     return initialNormalized === currentNormalized
@@ -311,7 +311,7 @@ export default function NormalLinks({ data }: EditorProps) {
   const openIconModal = (
     type: LinkType,
     itemIndex?: number,
-    linkIndex?: number
+    linkIndex?: number,
   ) => {
     setIconSelectionContext({ type, itemIndex, linkIndex })
     setIconsModalOpen(true)
@@ -437,7 +437,7 @@ export default function NormalLinks({ data }: EditorProps) {
 
       const newContentItems = buildContentItems(
         responseData.normalLinks,
-        responseData.linkGroups
+        responseData.linkGroups,
       )
       setValue("contentItems", newContentItems)
       alert("Links saved successfully!")
@@ -540,7 +540,7 @@ export default function NormalLinks({ data }: EditorProps) {
                           type="text"
                           placeholder="Title"
                           {...register(
-                            `contentItems.${itemIndex}.data.title` as const
+                            `contentItems.${itemIndex}.data.title` as const,
                           )}
                           className="theme-inline-input"
                         />
@@ -551,7 +551,7 @@ export default function NormalLinks({ data }: EditorProps) {
                           type="text"
                           placeholder="https://example.com"
                           {...register(
-                            `contentItems.${itemIndex}.data.url` as const
+                            `contentItems.${itemIndex}.data.url` as const,
                           )}
                           className="theme-inline-input"
                         />
@@ -602,7 +602,7 @@ export default function NormalLinks({ data }: EditorProps) {
                             type="text"
                             placeholder="Group Name"
                             {...register(
-                              `contentItems.${itemIndex}.data.name` as const
+                              `contentItems.${itemIndex}.data.name` as const,
                             )}
                             className="theme-inline-input"
                           />
@@ -679,10 +679,10 @@ export default function NormalLinks({ data }: EditorProps) {
                                           openIconModal(
                                             "groupLink",
                                             itemIndex,
-                                            linkIndex
+                                            linkIndex,
                                           )
                                         }
-                                        className="theme-icon-container theme-icon-container-sm hover:theme-border-hover transition-colors"
+                                        className="theme-text-primary theme-icon-container theme-icon-container-sm hover:theme-border-hover transition-colors"
                                       >
                                         {link.icon ? (
                                           <Icon
@@ -704,7 +704,7 @@ export default function NormalLinks({ data }: EditorProps) {
                                           type="text"
                                           placeholder="Title"
                                           {...register(
-                                            `contentItems.${itemIndex}.data.links.${linkIndex}.title` as const
+                                            `contentItems.${itemIndex}.data.links.${linkIndex}.title` as const,
                                           )}
                                           className="theme-inline-input text-sm"
                                         />
@@ -715,7 +715,7 @@ export default function NormalLinks({ data }: EditorProps) {
                                           type="text"
                                           placeholder="https://example.com"
                                           {...register(
-                                            `contentItems.${itemIndex}.data.links.${linkIndex}.url` as const
+                                            `contentItems.${itemIndex}.data.links.${linkIndex}.url` as const,
                                           )}
                                           className="theme-inline-input text-sm"
                                         />
@@ -726,7 +726,7 @@ export default function NormalLinks({ data }: EditorProps) {
                                         onClick={() =>
                                           removeLinkFromGroup(
                                             group.id,
-                                            linkIndex
+                                            linkIndex,
                                           )
                                         }
                                         className="p-1.5 theme-text-muted opacity-0 group-hover/link:opacity-100 transition-opacity hover:theme-text-primary"

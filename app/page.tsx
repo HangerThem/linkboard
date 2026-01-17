@@ -34,7 +34,7 @@ export default async function Page() {
 
   return (
     <div>
-      {process.env.NODE_ENV === "development" && (
+      {/* {process.env.NODE_ENV === "development" && (
         <Link
           href="/editor"
           title="Go to Editor"
@@ -43,11 +43,11 @@ export default async function Page() {
           <Icon name="PencilSquare" size={24} />
         </Link>
       )}
-      {settings.shareBar && <ShareBar />}
-      <main className="max-w-2xl mx-auto px-4 py-12 space-y-8">
-        <div className="flex flex-col items-center space-y-4">
+      {settings.shareBar && <ShareBar />} */}
+      <main className="max-w-2xl mx-auto px-4 py-12 space-y-4">
+        <div className="flex flex-col items-center">
           {profile.avatar && (
-            <div className="theme-profile-image w-48 h-48">
+            <div className="theme-profile-image bg-white w-48 h-48">
               <Image
                 src={profile.avatar}
                 alt="Profile"
