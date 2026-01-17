@@ -6,9 +6,9 @@ async function main() {
   await prisma.profile.create({
     data: {
       id: "default",
-      name: "Your Name",
-      bio: "This is your bio.",
-      avatar: null,
+      name: "John Doe",
+      bio: "Welcome to my LinkBoard!",
+      avatar: "/uploads/default-avatar.png",
     },
   })
 

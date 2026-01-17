@@ -94,7 +94,7 @@ export default function ThemeForm({ data }: ThemeFormProps) {
                       <Icon name="Check" size={14} />
                     </div>
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-theme-bg/60 backdrop-blur-sm py-2 px-3">
+                  <div className="absolute bottom-0 left-0 right-0 bg-theme-bg/60 backdrop-blur-xs py-2 px-3">
                     <span className="theme-text-primary text-sm font-medium">
                       {themeOption.at(0)?.toUpperCase() +
                         themeOption.slice(1).replace("_", " ")}

@@ -21,6 +21,8 @@ LinkBoard is a self-hosted web application that allows you to create a personali
 - **Share Bar**: Built-in social sharing functionality
 - **Responsive Design**: Works seamlessly on all screen sizes
 - **SQLite Database**: Simple, file-based database with Prisma ORM
+- **API Documentation**: Built-in Swagger UI for API exploration
+- **Analytics**: Vercel Analytics integration for usage insights
 
 ## Tech Stack
 
@@ -45,32 +47,34 @@ LinkBoard is a self-hosted web application that allows you to create a personali
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/hangerthem/LinkBoard.git
-cd LinkBoard
+git clone https://github.com/HangerThem/linkboard.git
+cd linkboard
 ```
 
 2. Install dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
 
 3. Set up the database:
 
 ```bash
-pnpm prisma migrate dev
+npx prisma migrate dev
 ```
 
 4. (Optional) Seed the database with sample data:
 
 ```bash
-pnpm prisma db seed
+npx prisma db seed
 ```
+
+> This will create a default profile. You can customize it later via the visual editor.
 
 5. Start the development server:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 6. Visit `http://localhost:3000` to see your LinkBoard
@@ -84,24 +88,8 @@ In development mode, you'll see an editor button (pencil icon) in the bottom-rig
 - **Profile Tab**: Update your name, bio, and upload an avatar
 - **Top Links Tab**: Add/edit icon-only social links
 - **Normal Links Tab**: Add/edit links with titles and organize them into groups
-- **Settings Tab**: Change theme, density, and toggle features
-
-### Single Mode (Production)
-
-Set the environment variable to run in single/production mode:
-
-```bash
-LINKBOARD_MODE=single
-```
-
-In this mode, the editor is disabled and only the public LinkBoard is displayed.
-
-### Environment Variables
-
-| Variable         | Description                       | Default         |
-| ---------------- | --------------------------------- | --------------- |
-| `LINKBOARD_MODE` | Set to `single` to disable editor | -               |
-| `DATABASE_URL`   | SQLite database path              | `file:./dev.db` |
+- **Settings Tab**: Change density, and toggle features
+- **Theme Tab**: Select from available themes
 
 ## Project Structure
 
@@ -131,6 +119,10 @@ LinkBoard includes 4 built-in themes:
 
 Themes are defined in the `themes/` directory and can be customized or extended.
 
+## API Documentation
+
+LinkBoard includes built-in API documentation powered by Swagger UI. Access it at `/docs` when running the application to explore all available endpoints for managing profiles, links, and settings.
+
 ## Database Schema
 
 - **Profile**: Name, bio, avatar
@@ -144,15 +136,13 @@ Themes are defined in the `themes/` directory and can be customized or extended.
 ### Build for Production
 
 ```bash
-pnpm build
-pnpm start
+npm run build
+npm run start
 ```
 
 ### Deploy to Vercel
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hangerthem/linkboard)
-
-> **Note**: For Vercel deployment, you may need to configure a persistent database solution as SQLite files are ephemeral on serverless platforms.
 
 ## Contributing
 
