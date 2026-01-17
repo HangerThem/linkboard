@@ -54,18 +54,24 @@ cd linkboard
 2. Install dependencies:
 
 ```bash
+pnpm install
+# or
 npm install
 ```
 
 3. Set up the database:
 
 ```bash
+pnpm prisma migrate dev
+# or
 npx prisma migrate dev
 ```
 
 4. (Optional) Seed the database with sample data:
 
 ```bash
+pnpm prisma db seed
+# or
 npx prisma db seed
 ```
 
@@ -74,6 +80,8 @@ npx prisma db seed
 5. Start the development server:
 
 ```bash
+pnpm dev
+# or
 npm run dev
 ```
 
@@ -133,16 +141,11 @@ LinkBoard includes built-in API documentation powered by Swagger UI. Access it a
 
 ## Deployment
 
-### Build for Production
-
-```bash
-npm run build
-npm run start
-```
+You can deploy LinkBoard to any platform that supports Node.js applications. Below are instructions for deploying to Vercel.
 
 ### Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hangerthem/linkboard)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/HangerThem/linkboard)
 
 ## Contributing
 
