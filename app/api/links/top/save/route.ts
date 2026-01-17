@@ -2,6 +2,55 @@ import prisma from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 import { TopLinkSchema } from "@/types/TopLink"
 
+/**
+ * @swagger
+ * /links/top/save:
+ *   post:
+ *     summary: Save top links
+ *     description: Replaces all existing top links with the provided data
+ *     tags:
+ *       - Top Links
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - topLinks
+ *             properties:
+ *               topLinks:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/TopLink'
+ *     responses:
+ *       200:
+ *         description: Top links saved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     topLinks:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/TopLink'
+ *       400:
+ *         description: Invalid link data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()

@@ -25,6 +25,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
   const [profileOpen, setProfileOpen] = useState(true)
   const [originalData, setOriginalData] = useState(data)
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null)
+  const [avatarRemoved, setAvatarRemoved] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const {
@@ -39,7 +40,6 @@ export default function ProfileForm({ data }: ProfileFormProps) {
       profile: {
         name: originalData.name,
         bio: originalData.bio || "",
-        avatar: undefined,
       },
     },
   })
@@ -52,7 +52,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
       (originalData.bio || "") !== (profile.bio || "")
     const avatarFile = watch("profile.avatar")
     const avatarChanged = Boolean(avatarFile && avatarFile.size > 0)
-    return !profileChanged && !avatarChanged
+    return !profileChanged && !avatarChanged && !avatarRemoved
   }
 
   const handleAvatarClick = () => {
@@ -72,11 +72,11 @@ export default function ProfileForm({ data }: ProfileFormProps) {
   }
 
   const handleRemoveAvatar = () => {
-    setValue("profile.avatar", undefined)
-    setAvatarPreview(null)
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ""
+    if (originalData.avatar && !avatarPreview) {
+      setAvatarRemoved(true)
     }
+    setAvatarPreview(null)
+    setValue("profile.avatar", undefined)
   }
 
   const onSubmit = async (formData: FormData) => {
@@ -105,6 +105,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
       setValue("profile.bio", responseData.profile.bio || "")
       setValue("profile.avatar", undefined)
       setAvatarPreview(null)
+      setAvatarRemoved(false)
 
       alert("Profile saved successfully!")
     } catch (error) {
@@ -125,10 +126,10 @@ export default function ProfileForm({ data }: ProfileFormProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.15 }}
-            className="p-4 theme-link-card-nested h-64"
+            className="p-4 h-64"
           >
             <div className="flex gap-6">
-              <div className="flex flex-col items-center gap-2">
+              <div className="relative group flex flex-col items-center gap-2">
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -151,19 +152,19 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                         alt="Avatar preview"
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="theme-text-primary absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <Icon name="Camera" size={24} />
                       </div>
                     </>
-                  ) : data.avatar ? (
+                  ) : originalData.avatar && !avatarRemoved ? (
                     <>
                       <Image
-                        src={data.avatar}
+                        src={originalData.avatar}
                         alt="Current Avatar"
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <div className="theme-text-primary absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <Icon name="Camera" size={24} />
                       </div>
                     </>
@@ -174,18 +175,18 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                     </div>
                   )}
                 </motion.button>
-                {avatarPreview && (
+                {(avatarPreview || (originalData.avatar && !avatarRemoved)) && (
                   <button
                     type="button"
                     onClick={handleRemoveAvatar}
-                    className="text-xs theme-text-muted hover:text-red-400 transition-colors"
+                    className="theme-text-primary absolute top-2 right-2 p-1 theme-bg-card rounded-full hover:bg-red-600 transition-colors group-hover:flex hidden"
                   >
-                    Remove
+                    <Icon name="X" size={16} />
                   </button>
                 )}
               </div>
 
-              <div className="flex-1 flex flex-col gap-4">
+              <div className="flex-1 flex flex-col justify-between gap-4">
                 <div className="flex flex-col gap-1">
                   <label className="theme-text-muted text-xs uppercase tracking-wider">
                     Name
@@ -211,7 +212,7 @@ export default function ProfileForm({ data }: ProfileFormProps) {
                     {...register("profile.bio")}
                     placeholder="A short bio about yourself"
                     rows={3}
-                    className="theme-input h-24 resize-none"
+                    className="theme-input h-28 resize-none"
                   />
                   {errors.profile?.bio && (
                     <span className="text-red-500 text-xs">

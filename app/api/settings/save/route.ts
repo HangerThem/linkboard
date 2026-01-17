@@ -2,6 +2,51 @@ import prisma from "@/lib/prisma"
 import { NextRequest, NextResponse } from "next/server"
 import { SettingsSchema } from "@/types/Settings"
 
+/**
+ * @swagger
+ * /settings/save:
+ *   post:
+ *     summary: Save application settings
+ *     description: Updates the application settings including theme, density, and display options
+ *     tags:
+ *       - Settings
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - settings
+ *             properties:
+ *               settings:
+ *                 $ref: '#/components/schemas/Settings'
+ *     responses:
+ *       200:
+ *         description: Settings saved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     settings:
+ *                       $ref: '#/components/schemas/Settings'
+ *       400:
+ *         description: Invalid settings data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()

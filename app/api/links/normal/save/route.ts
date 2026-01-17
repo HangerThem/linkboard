@@ -3,6 +3,64 @@ import { NextRequest, NextResponse } from "next/server"
 import { NormalLinkSchema } from "@/types/NormalLink"
 import { LinkGroupSchema } from "@/types/LinkGroup"
 
+/**
+ * @swagger
+ * /links/normal/save:
+ *   post:
+ *     summary: Save normal links and link groups
+ *     description: Replaces all existing normal links and link groups with the provided data
+ *     tags:
+ *       - Normal Links
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - normalLinks
+ *               - linkGroups
+ *             properties:
+ *               normalLinks:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/NormalLink'
+ *               linkGroups:
+ *                 type: array
+ *                 items:
+ *                   $ref: '#/components/schemas/LinkGroup'
+ *     responses:
+ *       200:
+ *         description: Links saved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     normalLinks:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/NormalLink'
+ *                     linkGroups:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/LinkGroup'
+ *       400:
+ *         description: Invalid link data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Error'
+ */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
