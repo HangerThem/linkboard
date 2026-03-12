@@ -14,6 +14,7 @@ const nameRandomizer = ({ name, setRandomizedName }: NameRandomizerProps) => {
       randomChars += charList[Math.floor(Math.random() * charList.length)];
     }
     loopNumber++;
+    console.log(`Random string: ${randomChars}`);
     if (loopNumber >= 80) {
       setRandomizedName(name.slice(0, iterations) + randomChars);
       if (loopNumber % 2 === 0) iterations++;
